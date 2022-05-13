@@ -1,4 +1,4 @@
-import { Heading } from "@chakra-ui/react";
+const { Heading } = require("@chakra-ui/react");
 
 function App() {
   return (
