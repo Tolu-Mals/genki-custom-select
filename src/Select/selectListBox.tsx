@@ -17,9 +17,7 @@ const SelectListBox = (): JSX.Element => {
             padding-bottom: 12px;
         }
 
-        li:hover {
-            background-color:
-        }
+
 
         width: 250px;
     `;
@@ -38,7 +36,7 @@ const SelectListBox = (): JSX.Element => {
     }
     return (
         <ListBox
-        sx={listBoxStyle.light}
+        sx={listBoxStyle.dark}
         >
             <li>Option 1</li>
             <li>Option 2</li>
