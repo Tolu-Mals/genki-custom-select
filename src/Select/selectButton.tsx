@@ -8,10 +8,6 @@ const SelectButton = () => {
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const Select = styled(Flex)`
-      
-  `;
-  
   const OutlinedVariantStyle = {
     light: {
       border: "1px solid #E2E8F0",
@@ -62,7 +58,7 @@ const SelectButton = () => {
     }
   };
 
-  const mdStyle = {
+  const smStyle = {
     button: {
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
       fontSize: "14px",
@@ -74,7 +70,32 @@ const SelectButton = () => {
     },
   };
 
-  const buttonStyle = Object.assign({}, mdStyle.button, OutlinedVariantStyle.light);
+  const mdStyle = {
+    button: {
+      padding: "0.25rem 0.5rem 0.25rem 0.75rem",
+      fontSize: "16px",
+      lineHeight: "16px",
+    },
+    icon: {
+      width: 8,
+      height: 8,
+    },
+  };
+
+  const lgStyle = {
+    button: {
+        padding: "0.5rem 0.5rem 0.5rem 0.75rem",
+        fontSize: "18px",
+        lineHeight: "18px",
+      },
+    icon: {
+        width: 10,
+        height: 10,
+    },
+  }
+
+
+  const buttonStyle = Object.assign({}, lgStyle.button, OutlinedVariantStyle.dark);
 
   return (
     <Flex sx={buttonStyle} justify="space-between" align="center">
