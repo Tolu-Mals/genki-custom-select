@@ -15,7 +15,7 @@ const SelectButton = () => {
       color: "#565661",
     },
     dark: {
-        border: "1px solid #666674",
+        border: "1px solid #596375",
         borderRadius: "6px",
         color: "#C7C7C7",
     }
@@ -95,14 +95,14 @@ const SelectButton = () => {
   }
 
 
-  const buttonStyle = Object.assign({}, lgStyle.button, OutlinedVariantStyle.dark);
+  const buttonStyle = Object.assign({}, smStyle.button, OutlinedVariantStyle.light);
 
   return (
-    <Flex sx={buttonStyle} justify="space-between" align="center">
+    <Flex sx={buttonStyle} justify="space-between" align="center" mb={2}>
       <Text>Select Something</Text>
       <ChevronDownIcon
-        w={mdStyle.icon.width}
-        h={mdStyle.icon.height}
+        w={smStyle.icon.width}
+        h={smStyle.icon.height}
         colors={buttonStyle.color}
       />
     </Flex>
