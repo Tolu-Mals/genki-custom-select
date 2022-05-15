@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, chakra } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
 import { SelectProps } from "../types";
 
-// const Label = chakra(label);
 type optionProps = {
   children: React.ReactNode;
   value: string | number;
@@ -21,7 +20,7 @@ const Select = (props: SelectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string | number>();
   const { getButtonProps, getListBoxProps } = useSelect(props);
 
-  const handleSelectItem = (item: any) => {
+  const handleSelectItem = (item: string | number) => {
     setSelectedOption(item);
   };
 
