@@ -1,6 +1,6 @@
 
 
-const outlinedVariantStyle = {
+  const outlinedVariantStyle = {
     light: {
         '&:hover': {
           borderColor: "#C5C6C8",

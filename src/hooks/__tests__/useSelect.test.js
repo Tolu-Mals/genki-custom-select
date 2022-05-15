@@ -35,8 +35,8 @@ describe("useSelect tests", () => {
         )
 
         const { getButtonProps, getListBoxProps } = result.current
-        expect(getButtonProps).toMatchObject({variant: "outlined"})
-        expect(getListBoxProps).toBeDefined({hasTypeahead: true})
+        expect(getButtonProps).toMatchObject({...options, variant: "outlined"})
+        expect(getListBoxProps).toBeDefined({...options, hasTypeahead: true})
         rerender( {
             ...options,
             variant: "filled",

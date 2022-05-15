@@ -27,7 +27,7 @@ const Select = (props: SelectProps): JSX.Element => {
   const attachOnclicktoOption = (child: any) =>
     React.cloneElement(child, {
       onClick: () => {
-        handleSelectItem(child.props.value);
+        handleSelectItem(child.props.children);
       },
     });
 
