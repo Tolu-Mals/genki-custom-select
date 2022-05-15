@@ -8,16 +8,21 @@ import { SelectProps } from "../types";
 type optionProps = {
   children: React.ReactNode;
   value: string | number;
-  onClick?: () => {}
+  onClick?: () => {};
 };
 
 export const Option = (props: optionProps): JSX.Element => {
   const { children, value, onClick } = props;
-  return <li onClick={onClick} value={value}>{children}</li>;
+  return (
+    <li onClick={onClick} value={value}>
+      {children}
+    </li>
+  );
 };
 
 const Select = (props: SelectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string | number>();
+  const [showListBox, toggleListBox] = React.useState(false);
   const { getButtonProps, getListBoxProps } = useSelect(props);
 
   const handleSelectItem = (item: string | number) => {
@@ -35,8 +40,8 @@ const Select = (props: SelectProps): JSX.Element => {
 
   return (
     <Box>
-      <SelectButton {...getButtonProps} selectedOption={selectedOption} />
-      <SelectListBox {...getListBoxProps} options={options} />
+      <SelectButton {...getButtonProps} onClick={() => toggleListBox(!showListBox)} selectedOption={selectedOption} />
+      {showListBox && <SelectListBox {...getListBoxProps} options={options} />}
     </Box>
   );
 };

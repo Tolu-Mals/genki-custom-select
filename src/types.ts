@@ -21,6 +21,7 @@ export type ButtonProps = {
     errorBorderColor?: string;
     focusBorderColor?: string;
     fullWidth?: boolean;
+    onClick?: () => void
   };
 
   type WithChildren = {

@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import { ButtonProps } from "../types";
 import styleObjects from "./styleObjects";
 
@@ -7,8 +8,6 @@ const { ChevronDownIcon } = require("@chakra-ui/icons");
 
 const styled = require("@emotion/styled").default;
 
-
-
 const {
   filledVariantStyle,
   flushedVariantStyle,
@@ -16,12 +15,17 @@ const {
   unstyledVariantStyle,
   smStyle,
   mdStyle,
-  lgStyle
+  lgStyle,
 } = styleObjects;
 
 const SelectButton = (props: ButtonProps) => {
-  
-  const { variant = "filled", size = "md", placeholder, selectedOption } = props;
+  const {
+    variant = "filled",
+    size = "md",
+    placeholder,
+    selectedOption,
+    onClick,
+  } = props;
 
   const variantMap = {
     filled: filledVariantStyle,
@@ -33,8 +37,8 @@ const SelectButton = (props: ButtonProps) => {
   const sizeMap = {
     sm: smStyle,
     md: mdStyle,
-    lg: lgStyle
-  }
+    lg: lgStyle,
+  };
 
   const buttonStyle = Object.assign(
     {},
@@ -43,14 +47,23 @@ const SelectButton = (props: ButtonProps) => {
   );
 
   return (
-    <Flex sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
-      <Text fontSize="lg" color="black">{selectedOption ?? placeholder}</Text>
-      <ChevronDownIcon
-        w={sizeMap[size].icon.width}
-        h={sizeMap[size].icon.height}
-        colors={buttonStyle.color}
-      />
-    </Flex>
+      <Flex
+        onClick={onClick}
+        sx={buttonStyle}
+        justify="space-between"
+        align="center"
+        mb={2}
+        tabIndex="0"
+      >
+        <Text fontSize="lg" color="black">
+          {selectedOption ?? placeholder}
+        </Text>
+        <ChevronDownIcon
+          w={sizeMap[size].icon.width}
+          h={sizeMap[size].icon.height}
+          colors={buttonStyle.color}
+        />
+      </Flex>
   );
 };
 
