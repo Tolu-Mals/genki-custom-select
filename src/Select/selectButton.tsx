@@ -104,10 +104,20 @@ const SelectButton = () => {
 
   const UnstyledVariantStyle = {
     light: {
+        "&:focus": {
+          border: "1px solid #2F80ED",
+          boxShadow: "rgb(49 130 206) 0px 0.5px",
+        },
         color: "#565661",
+        outline: "none"
     },
     dark: {
+        "&:focus": {
+          borderColor: "#2F80ED",
+          boxShadow: "rgb(49 130 206) 0px 0.5px",
+        },
         color: "#C7C7C7",
+        outline: "none"
     }
   };
 
@@ -148,7 +158,7 @@ const SelectButton = () => {
   }
 
 
-  const buttonStyle = Object.assign({}, smStyle.button, FilledVariantStyle.light);
+  const buttonStyle = Object.assign({}, smStyle.button, UnstyledVariantStyle.light);
 
   return (
     <Flex sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
