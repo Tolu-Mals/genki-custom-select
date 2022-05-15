@@ -2,7 +2,8 @@ export type ListBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
     onChange?: () => void;
-    options?: React.ReactNode
+    options?: React.ReactNode;
+    size?: "sm" | "md" | "lg";
   };
   
 export type ButtonProps = {

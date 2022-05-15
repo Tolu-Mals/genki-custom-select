@@ -1,22 +1,18 @@
 import { ButtonProps } from "../types";
 import styleObjects from "./styleObjects";
 
-const { Flex, Text, useColorMode } = require("@chakra-ui/react");
+const { Flex, Text } = require("@chakra-ui/react");
 
 const { ChevronDownIcon } = require("@chakra-ui/icons");
-
-const styled = require("@emotion/styled").default;
-
-
 
 const {
   filledVariantStyle,
   flushedVariantStyle,
   outlinedVariantStyle,
   unstyledVariantStyle,
-  smStyle,
-  mdStyle,
-  lgStyle
+  smButtonStyle,
+  mdButtonStyle,
+  lgButtonStyle
 } = styleObjects;
 
 const SelectButton = (props: ButtonProps) => {
@@ -31,9 +27,9 @@ const SelectButton = (props: ButtonProps) => {
   };
 
   const sizeMap = {
-    sm: smStyle,
-    md: mdStyle,
-    lg: lgStyle
+    sm: smButtonStyle,
+    md: mdButtonStyle,
+    lg: lgButtonStyle
   }
 
   const buttonStyle = Object.assign(
