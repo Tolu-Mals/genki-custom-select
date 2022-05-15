@@ -6,14 +6,12 @@ import styleObjects from "./styleObjects";
 const { listBoxStyle } = styleObjects
 
 const SelectListBox = (props: ListBoxProps): JSX.Element => {
-
+    const { options } = props
     return (
         <ListBox
         sx={listBoxStyle.light}
         >
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
+           {options}
         </ListBox>
     )
 };

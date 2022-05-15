@@ -2,10 +2,12 @@ export type ListBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
     onChange?: () => void;
+    options?: React.ReactNode
   };
   
-  export type ButtonProps = {
+export type ButtonProps = {
     placeholder?: string;
+    selectedOption?: string | number;
     readOnly?: boolean;
     required?: boolean;
     size?: "sm" | "md" | "lg";
@@ -20,3 +22,8 @@ export type ListBoxProps = {
     focusBorderColor?: string;
     fullWidth?: boolean;
   };
+
+  type WithChildren = {
+      children : React.ReactNode
+  }
+  export type SelectProps = ListBoxProps & ButtonProps & WithChildren 

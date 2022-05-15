@@ -19,7 +19,7 @@ const {
 
 const SelectButton = (props: ButtonProps) => {
   
-  const { variant = "filled", size = "md" } = props;
+  const { variant = "filled", size = "md", placeholder, selectedOption } = props;
 
   const variantMap = {
     filled: filledVariantStyle,
@@ -27,7 +27,6 @@ const SelectButton = (props: ButtonProps) => {
     outlined: outlinedVariantStyle,
     unstyled: unstyledVariantStyle,
   };
-
 
   const sizeMap = {
     sm: smStyle,
@@ -43,10 +42,10 @@ const SelectButton = (props: ButtonProps) => {
 
   return (
     <Flex sx={buttonStyle} justify="space-between" align="center" mb={2}>
-      <Text>Select Something</Text>
+      <Text fontSize="lg" color="black">{selectedOption ?? placeholder}</Text>
       <ChevronDownIcon
-        w={smStyle.icon.width}
-        h={smStyle.icon.height}
+        w={sizeMap[size].icon.width}
+        h={sizeMap[size].icon.height}
         colors={buttonStyle.color}
       />
     </Flex>

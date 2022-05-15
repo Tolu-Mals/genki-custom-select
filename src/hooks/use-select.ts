@@ -1,13 +1,12 @@
-import { ListBoxProps, ButtonProps } from '../types';
+import { ListBoxProps, ButtonProps, SelectProps } from '../types';
 
-export type Options = ListBoxProps & ButtonProps
 
 type UseSelectReturn = {
     getButtonProps: ButtonProps,
     getListBoxProps: ListBoxProps
 }
 
-export const useSelect = (options: Options) : UseSelectReturn => {
+export const useSelect = (options: SelectProps) : UseSelectReturn => {
 
   const {
     placeholder,
@@ -49,7 +48,7 @@ export const useSelect = (options: Options) : UseSelectReturn => {
   const getListBoxProps: ListBoxProps = {
     listBoxStyle,
     hasTypeahead,
-    onChange
+    onChange,
   };
 
   return {getButtonProps, getListBoxProps}
