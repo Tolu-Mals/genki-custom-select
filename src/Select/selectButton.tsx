@@ -38,13 +38,13 @@ const SelectButton = (props: ButtonProps) => {
 
   const buttonStyle = Object.assign(
     {},
+    variantMap[variant].light,
     sizeMap[size].button,
-    variantMap[variant].light
   );
 
   return (
     <Flex sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
-      <Text fontSize="lg" color="black">{selectedOption ?? placeholder}</Text>
+      <Text color="black">{selectedOption ?? placeholder}</Text>
       <ChevronDownIcon
         w={sizeMap[size].icon.width}
         h={sizeMap[size].icon.height}

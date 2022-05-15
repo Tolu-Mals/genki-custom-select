@@ -143,7 +143,7 @@
 
   const lgStyle = {
     button: {
-        padding: "0.5rem 0.5rem 0.5rem 0.75rem",
+        padding: "0.25rem 0.5rem 0.25rem 0.75rem",
         fontSize: "18px",
         lineHeight: "18px",
       },
