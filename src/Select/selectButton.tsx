@@ -12,12 +12,13 @@ const {
   unstyledVariantStyle,
   smButtonStyle,
   mdButtonStyle,
-  lgButtonStyle
+  lgButtonStyle,
+  buttonDisabledStyle
 } = styleObjects;
 
 const SelectButton = (props: ButtonProps) => {
   
-  const { variant = "filled", size = "md", placeholder, selectedOption } = props;
+  const { variant = "filled", size = "md", placeholder, selectedOption, isDisabled } = props;
 
   const variantMap = {
     filled: filledVariantStyle,
@@ -32,15 +33,26 @@ const SelectButton = (props: ButtonProps) => {
     lg: lgButtonStyle
   }
 
-  const buttonStyle = Object.assign(
+  const buttonStyle = isDisabled ? Object.assign(
+    {},
+    variantMap[variant].light,
+    sizeMap[size].button,
+    buttonDisabledStyle.light
+  ):Object.assign(
     {},
     variantMap[variant].light,
     sizeMap[size].button,
   );
 
+
   return (
-    <Flex sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
-      <Text color="black">{selectedOption ?? placeholder}</Text>
+    <Flex 
+    sx={buttonStyle} 
+    justify="space-between"
+    align="center" mb={2}
+    tabIndex={isDisabled ? null:"0"}
+    >
+      <Text>{selectedOption ?? placeholder}</Text>
       <ChevronDownIcon
         w={sizeMap[size].icon.width}
         h={sizeMap[size].icon.height}

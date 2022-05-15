@@ -115,6 +115,17 @@
     }
   };
 
+
+  const buttonDisabledStyle = {
+    light: {
+      color: "#747486",
+      backgroundColor: "#F8F8F8",
+      outline: "none",
+      border: "1px solid #DDDDDD",
+      "&:hover": {}
+    }
+  }
+
   const smButtonStyle = {
     button: {
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
@@ -223,8 +234,9 @@
       listBoxStyle,
       smListBoxStyle,
       mdListBoxStyle,
-      lgListBoxStyle
+      lgListBoxStyle,
+      buttonDisabledStyle
   }
 
-  export default styleObjects
+  export default styleObjects;
 
