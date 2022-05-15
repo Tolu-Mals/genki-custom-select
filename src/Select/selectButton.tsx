@@ -1,11 +1,13 @@
+import { ButtonProps } from "../types";
+import styleObjects from "./styleObjects";
+
 const { Flex, Text, useColorMode } = require("@chakra-ui/react");
 
 const { ChevronDownIcon } = require("@chakra-ui/icons");
 
 const styled = require("@emotion/styled").default;
 
-import { ButtonProps } from "../types";
-import styleObjects from "./styleObjects";
+
 
 const {
   filledVariantStyle,
@@ -36,12 +38,12 @@ const SelectButton = (props: ButtonProps) => {
 
   const buttonStyle = Object.assign(
     {},
-    variantMap[variant].light,
     sizeMap[size].button,
+    variantMap[variant].light
   );
 
   return (
-    <Flex sx={buttonStyle} justify="space-between" align="center" mb={2}>
+    <Flex sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
       <Text fontSize="lg" color="black">{selectedOption ?? placeholder}</Text>
       <ChevronDownIcon
         w={sizeMap[size].icon.width}
