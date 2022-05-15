@@ -49,6 +49,7 @@ export const useSelect = (options: SelectProps) : UseSelectReturn => {
     listBoxStyle,
     hasTypeahead,
     onChange,
+    size
   };
 
   return {getButtonProps, getListBoxProps}

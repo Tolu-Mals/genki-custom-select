@@ -9,15 +9,12 @@ type optionProps = {
   children: React.ReactNode;
   value: string | number;
   onClick?: () => {};
+  selected?: boolean;
 };
 
 export const Option = (props: optionProps): JSX.Element => {
-  const { children, value, onClick } = props;
-  return (
-    <li onClick={onClick} value={value}>
-      {children}
-    </li>
-  );
+  const { children, value, onClick, selected } = props;
+  return <li onClick={onClick} value={value} className={`${selected && 'active'}`}>{children}</li>;
 };
 
 const Select = (props: SelectProps): JSX.Element => {
@@ -34,6 +31,7 @@ const Select = (props: SelectProps): JSX.Element => {
       onClick: () => {
         handleSelectItem(child.props.children);
       },
+      selected: (child.props.children === selectedOption) ? true:false,
     });
 
   const options = React.Children.map(props.children, attachOnclicktoOption);

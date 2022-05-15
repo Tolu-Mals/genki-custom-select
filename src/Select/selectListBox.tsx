@@ -1,43 +1,39 @@
-const { chakra } = require("@chakra-ui/react");
-const styled = require("@emotion/styled").default;
 import { ListBoxProps } from "../types"
 import styleObjects from "./styleObjects";
+const { chakra } = require("@chakra-ui/react");
+const styled = require("@emotion/styled").default;
 
-const { listBoxStyle } = styleObjects
+
+const { listBoxStyle, smListBoxStyle, mdListBoxStyle, lgListBoxStyle } = styleObjects;
+
+const sizeMap = {
+    sm: smListBoxStyle,
+    md: mdListBoxStyle,
+    lg: lgListBoxStyle
+}
 
 const SelectListBox = (props: ListBoxProps): JSX.Element => {
-    const { options } = props
+    const { options, size = "md" } = props
+
+    const style = Object.assign({}, listBoxStyle.light, sizeMap[size])
+
     return (
         <ListBox
-        sx={listBoxStyle.light}
+        sx={style}
         >
            {options}
         </ListBox>
     )
 };
 
-
-
-
 const ListBox = styled(chakra.ul)`
 li {
     list-style: none;
-    padding: 8px 12px;
-}
-
-li:first-child {
-    padding-top: 12px;
-}
-
-li:last-child {
-    padding-bottom: 12px;
 }
 
 li:hover {
-    background-color:
+    cursor: pointer;
 }
-
-width: 250px;
 `;
 
 export default SelectListBox;

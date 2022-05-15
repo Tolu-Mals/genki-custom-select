@@ -1,5 +1,3 @@
-
-
   const outlinedVariantStyle = {
     light: {
       '&:hover': {
@@ -117,11 +115,11 @@
     }
   };
 
-  const smStyle = {
+  const smButtonStyle = {
     button: {
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
-      fontSize: "14px",
-      lineHeight: "14px",
+      fontSize: "0.875rem",
+      lineHeight: "0.875rem",
     },
     icon: {
       width: 6,
@@ -129,11 +127,11 @@
     },
   };
 
-  const mdStyle = {
+  const mdButtonStyle = {
     button: {
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
-      fontSize: "16px",
-      lineHeight: "16px",
+      fontSize: "1rem",
+      lineHeight: "1rem",
     },
     icon: {
       width: 8,
@@ -141,11 +139,11 @@
     },
   };
 
-  const lgStyle = {
+  const lgButtonStyle = {
     button: {
-        padding: "0.5rem 0.5rem 0.5rem 0.75rem",
-        fontSize: "18px",
-        lineHeight: "18px",
+        padding: "0.25rem 0.5rem 0.25rem 0.75rem",
+        fontSize: "1.125rem",
+        lineHeight: "1.125rem",
       },
     icon: {
         width: 10,
@@ -158,23 +156,74 @@
         border: "1px solid #E2E8F0",
         boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.08)",
         borderRadius: 6,
+        "li:hover": {
+          backgroundColor: "#F6F6F6"
+        },
+        "li.active": {
+          backgroundColor: "#F6F6F6"
+        }
     },
     dark: {
         border: "1px solid #596375",
         boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.29)",
         borderRadius: 6,
+        "li:hover": {
+          backgroundColor: "#7A889F"
+        }
     }
-}
-  
+  }
+
+  const smListBoxStyle = {
+    "li": {
+      padding: "8px 12px",
+    },
+    "li:first-of-type": {
+      paddingTop: "12px"
+    },
+    "li:last-of-type": {
+      paddingBottom: "12px"
+    },
+    fontSize: "0.875rem"
+  }
+
+  const mdListBoxStyle = {
+    "li": {
+      padding: "12px 12px",
+    },
+    "li:first-of-type": {
+      paddingTop: "14px"
+    },
+    "li:last-of-type": {
+      paddingBottom: "14px"
+    },
+    fontSize: "1rem"
+  }
+
+  const lgListBoxStyle = {
+    "li": {
+      padding: "14px 14px",
+    },
+    "li:first-of-type": {
+      paddingTop: "16px"
+    },
+    "li:last-of-type": {
+      paddingBottom: "16px"
+    },
+    fontSize: "1.125rem"
+  }
+
   const styleObjects = {
       filledVariantStyle,
       outlinedVariantStyle,
       flushedVariantStyle,
       unstyledVariantStyle,
-      smStyle,
-      mdStyle,
-      lgStyle,
-      listBoxStyle
+      smButtonStyle,
+      mdButtonStyle,
+      lgButtonStyle,
+      listBoxStyle,
+      smListBoxStyle,
+      mdListBoxStyle,
+      lgListBoxStyle
   }
 
   export default styleObjects
