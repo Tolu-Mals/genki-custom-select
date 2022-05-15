@@ -1,34 +1,11 @@
+import { ListBoxProps, ButtonProps } from '../types';
 
-type ListBoxProps = {
-  listBoxStyle?: object;
-  hasTypeahead?: boolean;
-  onChange?: () => void;
-};
-
-type ButtonProps = {
-  placeholder?: string;
-  readOnly?: boolean;
-  required?: boolean;
-  size?: "sm" | "md" | "lg";
-  variant?: "outline" | "filled" | "flushed" | "unstyled";
-  hideLabel?: boolean;
-  icon?: React.ReactNode;
-  name?: string;
-  buttonStyle?: object;
-  isDisabled?: boolean;
-  label?: string;
-  errorBorderColor?: string;
-  focusBorderColor?: string;
-  fullWidth?: boolean;
-};
-
-type Options = ListBoxProps & ButtonProps
+export type Options = ListBoxProps & ButtonProps
 
 type UseSelectReturn = {
     getButtonProps: ButtonProps,
     getListBoxProps: ListBoxProps
 }
-
 
 export const useSelect = (options: Options) : UseSelectReturn => {
 
