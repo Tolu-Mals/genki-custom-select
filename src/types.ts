@@ -14,7 +14,7 @@ export type ButtonProps = {
     size?: "sm" | "md" | "lg";
     variant?: "outlined" | "filled" | "flushed" | "unstyled";
     hideLabel?: boolean;
-    icon?: React.ReactNode;
+    customIcon?: any;
     name?: string;
     buttonStyle?: object;
     isDisabled?: boolean;

@@ -1,5 +1,6 @@
 import { Heading, Container, Button, useColorMode } from "@chakra-ui/react";
 import Select, { Option } from "./Select";
+import { PhoneIcon } from '@chakra-ui/icons'
 
 function App() {
   const { toggleColorMode } = useColorMode();
@@ -8,7 +9,7 @@ function App() {
       <Container>
         <Heading mb={4}>Custom Select Component</Heading>
         <Button onClick={toggleColorMode} mb={4}>Toggle dark</Button>
-        <Select variant="outlined" size="md" placeholder="yippee">
+        <Select variant="outlined" size="sm" placeholder="yippee" customIcon={<PhoneIcon />}>
           <Option value="1">option one</Option>
           <Option value="2">option two</Option>
           <Option value="3">option three</Option>

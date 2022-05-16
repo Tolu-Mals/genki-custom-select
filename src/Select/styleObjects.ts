@@ -76,7 +76,7 @@
       transition: "all 0.3s",
       color: "#565661",
       borderBottom: "1px solid #E2E8F0",
-      paddingLeft: 0,
+      paddingLeft: "0.5rem",
       paddingRight: 0,
       outline: "none"
     },
@@ -91,7 +91,7 @@
         transition: "border 0.3s",
         color: "#C7C7C7",
         borderBottom: "1px solid #596375",
-        paddingLeft: 0,
+        paddingLeft: "0.5rem",
         paddingRight: 0,
         outline: "none"
       },
@@ -117,20 +117,65 @@
   };
 
 
-  const buttonDisabledStyle = {
+  const outlinedVariantDisabledStyle = {
     light: {
       color: "#747486",
       backgroundColor: "#F8F8F8",
       outline: "none",
       border: "1px solid #DDDDDD",
-      "&:hover": {}
+      "&:hover": {},
+      "&:focus": {}
     },
     dark: {
       color: "#E0E0E0",
       backgroundColor: "#5C6271",
       outline: "none",
       border: "1px solid #8991A4",
-      "&:hover": {}
+      "&:hover": {},
+      "&:focus": {}
+    }
+  }
+
+  const flushedVariantDisabledStyle = {
+    light: {
+      outline: "none",
+      backgroundColor: "#F8F8F8",
+      borderColor: "#E2E8F0",
+      "&:hover": {},
+      "&:focus": {}
+    },
+    dark: {
+      outline: "none",
+      backgroundColor: "#5C6271",
+      borderColor: "#8991A4",
+      "&:hover": {},
+      "&:focus": {}
+    }
+  }
+
+  const outlinedVariantReadOnlyStyle = {
+    light: {
+      color: "#747486",
+      backgroundColor: "transparent",
+      outline: "none",
+      border: "1px solid #E2E8F0",
+    },
+    dark: {
+      color: "#E0E0E0",
+      backgroundColor: "#5C6271",
+      outline: "none",
+      border: "1px solid #8991A4",
+    }
+  }
+
+  const flushedVariantReadOnlyStyle = {
+    light: {
+      outline: "none",
+      bacgkroundColor: "#F8F8F8",
+    },
+    dark: {
+      outline: "none",
+      bacgkroundColor: "#5C6271",
     }
   }
 
@@ -172,7 +217,8 @@
     button: {
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
       fontSize: "0.875rem",
-      lineHeight: "0.875rem",
+      lineHeight: "1rem",
+      height: "34px"
     },
     icon: {
       width: 6,
@@ -185,6 +231,7 @@
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
       fontSize: "1rem",
       lineHeight: "1rem",
+      height: "42px",
     },
     icon: {
       width: 8,
@@ -197,6 +244,7 @@
         padding: "0.25rem 0.5rem 0.25rem 0.75rem",
         fontSize: "1.125rem",
         lineHeight: "1.125rem",
+        height: "50px",
       },
     icon: {
         width: 10,
@@ -280,9 +328,12 @@
       smListBoxStyle,
       mdListBoxStyle,
       lgListBoxStyle,
-      buttonDisabledStyle,
+      outlinedVariantDisabledStyle,
+      flushedVariantDisabledStyle,
       outlinedVariantInvalidStyle,
       flushedVariantInvalidStyle,
+      outlinedVariantReadOnlyStyle,
+      flushedVariantReadOnlyStyle,
   }
 
   export default styleObjects;
