@@ -20,6 +20,7 @@ const SelectListBox = (props: ListBoxProps): JSX.Element => {
     return (
         <ListBox
         sx={style}
+        tabIndex={-1}
         >
            {options}
         </ListBox>
