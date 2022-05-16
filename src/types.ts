@@ -18,6 +18,7 @@ export type ButtonProps = {
     name?: string;
     buttonStyle?: object;
     isDisabled?: boolean;
+    isInvalid?: boolean;
     label?: string;
     errorBorderColor?: string;
     focusBorderColor?: string;

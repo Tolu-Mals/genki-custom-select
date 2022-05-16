@@ -13,13 +13,15 @@ const {
   smButtonStyle,
   mdButtonStyle,
   lgButtonStyle,
-  buttonDisabledStyle
+  buttonDisabledStyle,
+  outlinedVariantInvalidStyle,
+  flushedVariantInvalidStyle
 } = styleObjects;
 
 const SelectButton = (props: ButtonProps) => {
 
   const { colorMode } = useColorMode();
-  const { variant = "filled", size = "md", placeholder, selectedOption, required, readOnly, isDisabled, } = props;
+  const { variant = "filled", size = "md", placeholder, selectedOption, required, readOnly, isDisabled, isInvalid } = props;
 
   const variantMap = {
     filled: filledVariantStyle,
@@ -38,6 +40,7 @@ const SelectButton = (props: ButtonProps) => {
     required?: boolean;
     readOnly?: boolean;
     isDisabled?: boolean;
+    isInvalid?: boolean;
   }
   
   const mode: "light" | "dark" = colorMode;
@@ -51,16 +54,30 @@ const SelectButton = (props: ButtonProps) => {
       buttonDisabledStyle[mode]
     );
 
+    else if (buttonState.isInvalid){
+      if(variant === "outlined" || variant === "filled") return Object.assign(
+        {}, 
+        sizeMap[size].button,
+        variantMap[variant][mode], 
+        outlinedVariantInvalidStyle[mode]
+      )
+      else if(variant === "flushed") return  Object.assign(
+        {}, 
+        sizeMap[size].button,
+        variantMap[variant][mode], 
+        flushedVariantInvalidStyle[mode]
+      )
+    }
+
     return Object.assign(
       {}, 
       sizeMap[size].button, 
       variantMap[variant][mode], 
     );
-    
+
   }
 
-  const buttonStyle = getButtonStyle({ required, readOnly, isDisabled });
-
+  const buttonStyle = getButtonStyle({ required, readOnly, isDisabled, isInvalid });
 
   return (
     <Flex 

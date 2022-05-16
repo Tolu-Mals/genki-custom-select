@@ -134,13 +134,37 @@
     }
   }
 
-  const buttonInvalidStyle = {
+  const outlinedVariantInvalidStyle = {
     light: {
-      color: "#747486",
-      backgroundColor: "#F8F8F8",
       outline: "none",
-      border: "1px solid #DDDDDD",
-      "&:hover": {}
+      border: "1px solid #EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0px 0px 1px",
+      "&:hover": {},
+      "&:focus": {},
+    },
+    dark: {
+      outline: "none",
+      border: "1px solid #EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0px 0px 1px",
+      "&:hover": {},
+      "&:focus": {},
+    }
+  }
+
+  const flushedVariantInvalidStyle = {
+    light: {
+      outline: "none",
+      borderColor: "#EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0.5px",
+      "&:hover": {},
+      "&:focus": {},
+    },
+    dark: {
+      outline: "none",
+      borderColor: "#EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0.5px",
+      "&:hover": {},
+      "&:focus": {},
     }
   }
 
@@ -256,7 +280,9 @@
       smListBoxStyle,
       mdListBoxStyle,
       lgListBoxStyle,
-      buttonDisabledStyle
+      buttonDisabledStyle,
+      outlinedVariantInvalidStyle,
+      flushedVariantInvalidStyle,
   }
 
   export default styleObjects;
