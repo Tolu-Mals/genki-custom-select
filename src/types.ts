@@ -1,3 +1,5 @@
+import React from "react";
+
 export type ListBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
@@ -14,7 +16,7 @@ export type ButtonProps = {
     size?: "sm" | "md" | "lg";
     variant?: "outlined" | "filled" | "flushed" | "unstyled";
     hideLabel?: boolean;
-    customIcon?: any;
+    customIcon?: React.ReactNode;
     name?: string;
     buttonStyle?: object;
     isDisabled?: boolean;

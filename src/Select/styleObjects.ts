@@ -77,7 +77,7 @@
       color: "#565661",
       borderBottom: "1px solid #E2E8F0",
       paddingLeft: "0.5rem",
-      paddingRight: 0,
+      paddingRight: "0.5rem",
       outline: "none"
     },
     dark: {
@@ -92,7 +92,7 @@
         color: "#C7C7C7",
         borderBottom: "1px solid #596375",
         paddingLeft: "0.5rem",
-        paddingRight: 0,
+        paddingRight: "0.5rem",
         outline: "none"
       },
   };
@@ -159,12 +159,14 @@
       backgroundColor: "transparent",
       outline: "none",
       border: "1px solid #E2E8F0",
+      "&:hover": {}
     },
     dark: {
       color: "#E0E0E0",
       backgroundColor: "#5C6271",
       outline: "none",
       border: "1px solid #8991A4",
+      "&:hover": {}
     }
   }
 
@@ -172,10 +174,12 @@
     light: {
       outline: "none",
       bacgkroundColor: "#F8F8F8",
+      "&:hover": {}
     },
     dark: {
       outline: "none",
       bacgkroundColor: "#5C6271",
+      "&:hover": {}
     }
   }
 
