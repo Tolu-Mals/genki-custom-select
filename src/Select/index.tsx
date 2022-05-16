@@ -21,6 +21,25 @@ const Select = (props: SelectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string | number>();
   const [showListBox, toggleListBox] = React.useState(false);
   const { getButtonProps, getListBoxProps } = useSelect(props);
+  const componentRef = React.useRef<HTMLDivElement>(null)
+
+  const handleSelectToggle = () => toggleListBox(!showListBox)
+
+  const handleClickAway = (e : any) => {
+    if (componentRef.current && !componentRef.current.contains(e.target)) {
+        handleSelectToggle()
+      }
+  }
+
+  React.useEffect(() => {
+    if(showListBox){
+      document.addEventListener("click", (e) => handleClickAway(e), true)
+    }
+    return () => {
+      document.removeEventListener("click", (e) => handleClickAway(e), true)
+    }
+  },[showListBox])
+  
 
   const handleSelectItem = (item: string | number) => {
     setSelectedOption(item);
@@ -31,14 +50,14 @@ const Select = (props: SelectProps): JSX.Element => {
       onClick: () => {
         handleSelectItem(child.props.children);
       },
-      selected: (child.props.children === selectedOption) ? true:false,
+      selected: child.props.children === selectedOption,
     });
 
   const options = React.Children.map(props.children, attachOnclicktoOption);
 
   return (
-    <Box>
-      <SelectButton {...getButtonProps} onClick={() => toggleListBox(!showListBox)} selectedOption={selectedOption} />
+    <Box ref={componentRef}>
+      <SelectButton {...getButtonProps} onClick={handleSelectToggle} selectedOption={selectedOption} />
       {showListBox && <SelectListBox {...getListBoxProps} options={options} />}
     </Box>
   );

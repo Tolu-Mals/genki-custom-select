@@ -45,7 +45,7 @@ const SelectButton = (props: ButtonProps) => {
   );
 
   return (
-    <Flex sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
+    <Flex onClick={onClick} sx={buttonStyle} justify="space-between" align="center" mb={2} tabIndex="0">
       <Text color="black">{selectedOption ?? placeholder}</Text>
       <ChevronDownIcon
         w={sizeMap[size].icon.width}
