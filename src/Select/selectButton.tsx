@@ -1,7 +1,7 @@
 import { ButtonProps } from "../types";
 import styleObjects from "./styleObjects";
 
-const { Flex, Text } = require("@chakra-ui/react");
+const { Flex, Text, useColorMode } = require("@chakra-ui/react");
 
 const { ChevronDownIcon } = require("@chakra-ui/icons");
 
@@ -17,8 +17,9 @@ const {
 } = styleObjects;
 
 const SelectButton = (props: ButtonProps) => {
-  
-  const { variant = "filled", size = "md", placeholder, selectedOption, isDisabled } = props;
+
+  const { colorMode } = useColorMode();
+  const { variant = "filled", size = "md", placeholder, selectedOption, required, readOnly, isDisabled, } = props;
 
   const variantMap = {
     filled: filledVariantStyle,
@@ -33,16 +34,29 @@ const SelectButton = (props: ButtonProps) => {
     lg: lgButtonStyle
   }
 
-  const buttonStyle = isDisabled ? Object.assign(
-    {},
-    variantMap[variant].light,
-    sizeMap[size].button,
-    buttonDisabledStyle.light
-  ):Object.assign(
-    {},
-    variantMap[variant].light,
-    sizeMap[size].button,
-  );
+   type buttonState = {
+    required?: boolean;
+    readOnly?: boolean;
+    isDisabled?: boolean;
+  }
+  
+  const mode: "light" | "dark" = colorMode;
+
+  const getButtonStyle = (buttonState: buttonState) => {
+    if(buttonState.isDisabled) return Object.assign(
+      {}, 
+      variantMap[variant][mode], 
+      sizeMap[size].button, 
+      buttonDisabledStyle[mode]
+    );
+    return Object.assign(
+      {}, 
+      variantMap[variant][mode], 
+      sizeMap[size].button, 
+    );
+  }
+
+  const buttonStyle = getButtonStyle({ required, readOnly, isDisabled });
 
 
   return (

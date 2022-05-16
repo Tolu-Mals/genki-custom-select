@@ -1,6 +1,6 @@
 import { ListBoxProps } from "../types"
 import styleObjects from "./styleObjects";
-const { chakra } = require("@chakra-ui/react");
+const { chakra, useColorMode } = require("@chakra-ui/react");
 const styled = require("@emotion/styled").default;
 
 
@@ -13,9 +13,12 @@ const sizeMap = {
 }
 
 const SelectListBox = (props: ListBoxProps): JSX.Element => {
-    const { options, size = "md" } = props
+    const { colorMode } = useColorMode();
+    const { options, size = "md" } = props;
 
-    const style = Object.assign({}, listBoxStyle.light, sizeMap[size])
+    const mode: "light" | "dark" = colorMode;
+
+    const style = Object.assign({}, listBoxStyle[mode], sizeMap[size])
 
     return (
         <ListBox
@@ -27,13 +30,21 @@ const SelectListBox = (props: ListBoxProps): JSX.Element => {
 };
 
 const ListBox = styled(chakra.ul)`
-li {
-    list-style: none;
-}
+    li {
+        list-style: none;
+    }
 
-li:hover {
-    cursor: pointer;
-}
+    li:hover {
+        cursor: pointer;
+    }
+
+    li:first-of-type {
+        border-radius: 4px 4px 0px 0px;
+    }
+
+    li:last-of-type {
+        border-radius: 0px 0px 4px 4px;
+    }
 `;
 
 export default SelectListBox;

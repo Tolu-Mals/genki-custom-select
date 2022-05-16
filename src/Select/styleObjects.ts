@@ -1,3 +1,4 @@
+  
   const outlinedVariantStyle = {
     light: {
       '&:hover': {
@@ -123,6 +124,23 @@
       outline: "none",
       border: "1px solid #DDDDDD",
       "&:hover": {}
+    },
+    dark: {
+      color: "#E0E0E0",
+      backgroundColor: "#5C6271",
+      outline: "none",
+      border: "1px solid #8991A4",
+      "&:hover": {}
+    }
+  }
+
+  const buttonInvalidStyle = {
+    light: {
+      color: "#747486",
+      backgroundColor: "#F8F8F8",
+      outline: "none",
+      border: "1px solid #DDDDDD",
+      "&:hover": {}
     }
   }
 
@@ -179,6 +197,9 @@
         boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.29)",
         borderRadius: 6,
         "li:hover": {
+          backgroundColor: "#7A889F"
+        },
+        "li.active": {
           backgroundColor: "#7A889F"
         }
     }
