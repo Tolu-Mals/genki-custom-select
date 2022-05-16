@@ -13,6 +13,9 @@ function App() {
           <Option value="1">Option one</Option>
           <Option value="2">Option two</Option>
           <Option value="3">Option three</Option>
+          <Option value="4">Option four</Option>
+          <Option value="5">Option five</Option>
+          <Option value="6">Option six</Option>
         </Select>
       </Container>
     </div>
