@@ -1,3 +1,5 @@
+import React from "react";
+
 export type ListBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
@@ -14,10 +16,11 @@ export type ButtonProps = {
     size?: "sm" | "md" | "lg";
     variant?: "outlined" | "filled" | "flushed" | "unstyled";
     hideLabel?: boolean;
-    icon?: React.ReactNode;
+    customIcon?: React.ReactNode;
     name?: string;
     buttonStyle?: object;
     isDisabled?: boolean;
+    isInvalid?: boolean;
     label?: string;
     errorBorderColor?: string;
     focusBorderColor?: string;

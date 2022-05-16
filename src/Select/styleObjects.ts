@@ -1,3 +1,4 @@
+  
   const outlinedVariantStyle = {
     light: {
       '&:hover': {
@@ -75,8 +76,8 @@
       transition: "all 0.3s",
       color: "#565661",
       borderBottom: "1px solid #E2E8F0",
-      paddingLeft: 0,
-      paddingRight: 0,
+      paddingLeft: "0.5rem",
+      paddingRight: "0.5rem",
       outline: "none"
     },
     dark: {
@@ -90,8 +91,8 @@
         transition: "border 0.3s",
         color: "#C7C7C7",
         borderBottom: "1px solid #596375",
-        paddingLeft: 0,
-        paddingRight: 0,
+        paddingLeft: "0.5rem",
+        paddingRight: "0.5rem",
         outline: "none"
       },
   };
@@ -115,11 +116,113 @@
     }
   };
 
+
+  const outlinedVariantDisabledStyle = {
+    light: {
+      color: "#747486",
+      backgroundColor: "#F8F8F8",
+      outline: "none",
+      border: "1px solid #DDDDDD",
+      "&:hover": {},
+      "&:focus": {}
+    },
+    dark: {
+      color: "#E0E0E0",
+      backgroundColor: "#5C6271",
+      outline: "none",
+      border: "1px solid #8991A4",
+      "&:hover": {},
+      "&:focus": {}
+    }
+  }
+
+  const flushedVariantDisabledStyle = {
+    light: {
+      outline: "none",
+      backgroundColor: "#F8F8F8",
+      borderColor: "#E2E8F0",
+      "&:hover": {},
+      "&:focus": {}
+    },
+    dark: {
+      outline: "none",
+      backgroundColor: "#5C6271",
+      borderColor: "#8991A4",
+      "&:hover": {},
+      "&:focus": {}
+    }
+  }
+
+  const outlinedVariantReadOnlyStyle = {
+    light: {
+      color: "#747486",
+      backgroundColor: "transparent",
+      outline: "none",
+      border: "1px solid #E2E8F0",
+      "&:hover": {}
+    },
+    dark: {
+      color: "#E0E0E0",
+      backgroundColor: "#5C6271",
+      outline: "none",
+      border: "1px solid #8991A4",
+      "&:hover": {}
+    }
+  }
+
+  const flushedVariantReadOnlyStyle = {
+    light: {
+      outline: "none",
+      bacgkroundColor: "#F8F8F8",
+      "&:hover": {}
+    },
+    dark: {
+      outline: "none",
+      bacgkroundColor: "#5C6271",
+      "&:hover": {}
+    }
+  }
+
+  const outlinedVariantInvalidStyle = {
+    light: {
+      outline: "none",
+      border: "1px solid #EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0px 0px 1px",
+      "&:hover": {},
+      "&:focus": {},
+    },
+    dark: {
+      outline: "none",
+      border: "1px solid #EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0px 0px 1px",
+      "&:hover": {},
+      "&:focus": {},
+    }
+  }
+
+  const flushedVariantInvalidStyle = {
+    light: {
+      outline: "none",
+      borderColor: "#EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0.5px",
+      "&:hover": {},
+      "&:focus": {},
+    },
+    dark: {
+      outline: "none",
+      borderColor: "#EB5757",
+      boxShadow: "rgb(235 87 87) 0px 0.5px",
+      "&:hover": {},
+      "&:focus": {},
+    }
+  }
+
   const smButtonStyle = {
     button: {
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
       fontSize: "0.875rem",
-      lineHeight: "0.875rem",
+      lineHeight: "1rem",
+      height: "34px"
     },
     icon: {
       width: 6,
@@ -132,6 +235,7 @@
       padding: "0.25rem 0.5rem 0.25rem 0.75rem",
       fontSize: "1rem",
       lineHeight: "1rem",
+      height: "42px",
     },
     icon: {
       width: 8,
@@ -144,6 +248,7 @@
         padding: "0.25rem 0.5rem 0.25rem 0.75rem",
         fontSize: "1.125rem",
         lineHeight: "1.125rem",
+        height: "50px",
       },
     icon: {
         width: 10,
@@ -168,6 +273,9 @@
         boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.29)",
         borderRadius: 6,
         "li:hover": {
+          backgroundColor: "#7A889F"
+        },
+        "li.active": {
           backgroundColor: "#7A889F"
         }
     }
@@ -223,8 +331,14 @@
       listBoxStyle,
       smListBoxStyle,
       mdListBoxStyle,
-      lgListBoxStyle
+      lgListBoxStyle,
+      outlinedVariantDisabledStyle,
+      flushedVariantDisabledStyle,
+      outlinedVariantInvalidStyle,
+      flushedVariantInvalidStyle,
+      outlinedVariantReadOnlyStyle,
+      flushedVariantReadOnlyStyle,
   }
 
-  export default styleObjects
+  export default styleObjects;
 

@@ -19,6 +19,7 @@ export const Option = (props: optionProps): JSX.Element => {
 
 const Select = (props: SelectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string | number>();
+  const [ isInvalid, setIsInvalid ] = React.useState<boolean>(true);
   const { getButtonProps, getListBoxProps } = useSelect(props);
 
   const handleSelectItem = (item: string | number) => {
@@ -37,7 +38,11 @@ const Select = (props: SelectProps): JSX.Element => {
 
   return (
     <Box>
-      <SelectButton {...getButtonProps} selectedOption={selectedOption} />
+      <SelectButton 
+      {...getButtonProps} 
+      selectedOption={selectedOption} 
+      isInvalid={isInvalid}
+      />
       <SelectListBox {...getListBoxProps} options={options} />
     </Box>
   );
