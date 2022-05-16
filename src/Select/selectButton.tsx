@@ -43,17 +43,20 @@ const SelectButton = (props: ButtonProps) => {
   const mode: "light" | "dark" = colorMode;
 
   const getButtonStyle = (buttonState: buttonState) => {
+
     if(buttonState.isDisabled) return Object.assign(
       {}, 
+      sizeMap[size].button,
       variantMap[variant][mode], 
-      sizeMap[size].button, 
       buttonDisabledStyle[mode]
     );
+
     return Object.assign(
       {}, 
-      variantMap[variant][mode], 
       sizeMap[size].button, 
+      variantMap[variant][mode], 
     );
+    
   }
 
   const buttonStyle = getButtonStyle({ required, readOnly, isDisabled });
