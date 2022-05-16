@@ -320,6 +320,36 @@
     fontSize: "1.125rem"
   }
 
+  const labelStyle = {
+    light: {
+      color: "#333333",
+    },
+    dark: {
+      color: "#F9F9F9"
+    }
+  }
+
+  const labelSizes = {
+    sm: {
+      fontSize: "0.875rem",
+      fontWeight: "500",
+      display: "inline-block",
+      marginBottom: "0.25rem"
+    },
+    md: {
+      fontSize: "1rem",
+      fontWeight: "500",
+      display: "inline-block",
+      marginBottom: "0.5rem"
+    },
+    lg: {
+      fontSize: "1.125rem",
+      fontWeight: "500",
+      display: "inline-block",
+      marginBottom: "0.5rem"
+    }
+  }
+
   const styleObjects = {
       filledVariantStyle,
       outlinedVariantStyle,
@@ -338,6 +368,8 @@
       flushedVariantInvalidStyle,
       outlinedVariantReadOnlyStyle,
       flushedVariantReadOnlyStyle,
+      labelSizes,
+      labelStyle
   }
 
   export default styleObjects;
