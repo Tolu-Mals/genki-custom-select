@@ -1,9 +1,10 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, chakra, useColorMode } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
 import { SelectProps } from "../types";
+import styleObjects from "./styleObjects";
 
 type optionProps = {
   children: React.ReactNode;
@@ -47,7 +48,6 @@ const Select = (props: SelectProps): JSX.Element => {
   const [activeOption, setActiveOption] = React.useState<string | number>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
   const [showListBox, toggleListBox] = React.useState(false);
-  const { getButtonProps, getListBoxProps } = useSelect(props);
   const _options: Array<string | number> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
 
@@ -74,6 +74,9 @@ const Select = (props: SelectProps): JSX.Element => {
    
   }, [activeOption])
   
+  const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
+  const { getButtonProps, getListBoxProps } = useSelect(props);
+  const { colorMode: mode } = useColorMode();
 
   const handleSelectItem = (item: string | number) => {
     setSelectedOption(item);
@@ -140,12 +143,20 @@ const Select = (props: SelectProps): JSX.Element => {
   options?.forEach((x) => _options.push(x.props.option));
 
 
+  const { labelStyle, labelSizes } = styleObjects;
+  const { size = "md" } = getButtonProps;
+  
+
+  const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size] );
+
   return (
     <Box ref={clickAwayRef}>
-      <SelectButton
-        {...getButtonProps}
-        onClick={handleSelectToggle}
-        selectedOption={selectedOption}
+      { props.label ? <chakra.label sx={labelSx}>{ props.label }</chakra.label>:<chakra.label sx={labelSx}>{props.placeholder}</chakra.label> }
+      <SelectButton 
+      {...getButtonProps} 
+      onClick={handleSelectToggle}
+      selectedOption={selectedOption} 
+      isInvalid={isInvalid}
       />
       {showListBox && <SelectListBox {...getListBoxProps} options={options} />}
     </Box>
