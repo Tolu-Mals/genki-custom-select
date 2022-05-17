@@ -7,7 +7,7 @@ export type ListBoxProps = {
   };
   
 export type ButtonProps = {
-    placeholder?: string;
+    placeholder?: string | number;
     selectedOption?: string | number;
     readOnly?: boolean;
     required?: boolean;

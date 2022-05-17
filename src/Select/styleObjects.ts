@@ -160,8 +160,11 @@
           backgroundColor: "#F6F6F6"
         },
         "li.active": {
+          backgroundColor: "#e6e6e6"
+        },
+        "li.current": {
           backgroundColor: "#F6F6F6"
-        }
+        },
     },
     dark: {
         border: "1px solid #596375",

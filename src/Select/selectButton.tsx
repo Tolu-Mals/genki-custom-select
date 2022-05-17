@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import { ButtonProps } from "../types";
 import styleObjects from "./styleObjects";
 

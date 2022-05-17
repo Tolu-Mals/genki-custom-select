@@ -1,4 +1,4 @@
-import React, { MutableRefObject, RefObject } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
@@ -10,12 +10,13 @@ type optionProps = {
   value: string | number;
   onClick?: () => {};
   selected?: boolean;
+  active?: boolean;
   onKeyDown?: React.KeyboardEventHandler<HTMLLIElement>;
   isListBoxOpen?: boolean;
 };
 
 export const Option = (props: optionProps): JSX.Element => {
-  const { children, value, onClick, selected, onKeyDown, isListBoxOpen } =
+  const { children, value, onClick, selected, onKeyDown, isListBoxOpen, active } =
     props;
 
   const listRef = React.useRef(null);
@@ -31,10 +32,10 @@ export const Option = (props: optionProps): JSX.Element => {
     <li
       ref={listRef}
       onClick={onClick}
-      tabIndex={0}
+      tabIndex={-1}
       value={value}
       onKeyDown={onKeyDown}
-      className={`${selected && "active"}`}
+      className={`${selected && "active"} ${active && "current"}` }
     >
       {children}
     </li>
@@ -43,9 +44,12 @@ export const Option = (props: optionProps): JSX.Element => {
 
 const Select = (props: SelectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string | number>();
-
+  const [activeOption, setActiveOption] = React.useState<string | number>();
+  const [optionIndex, setOptionIndex] = React.useState<number>(-1)
+  // const [optionsList, setOptionsList] = React.useState<Array<string | number>>([])
   const [showListBox, toggleListBox] = React.useState(false);
   const { getButtonProps, getListBoxProps } = useSelect(props);
+  const _options: Array<string | number> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
 
   const handleSelectToggle = () => toggleListBox(!showListBox);
@@ -63,22 +67,56 @@ const Select = (props: SelectProps): JSX.Element => {
     return () => {
       document.removeEventListener("click", (e) => handleClickAway(e), true);
     };
-    //eslint-disable-nextline
+    //eslint-disable-next-line
   }, [showListBox]);
+
+  React.useEffect(() => {
+    setOptionIndex(_options.indexOf(activeOption!))
+   
+  }, [activeOption])
+  
 
   const handleSelectItem = (item: string | number) => {
     setSelectedOption(item);
   };
 
-  const handleKeyDown = (option: string | number) => (e: React.KeyboardEvent<HTMLLIElement>) => {
-    console.log(e.key)
+  const handleKeyBoardNav = (index : number, direction: string) => {
+    switch (direction) {
+      case "up":
+        if(index > 0){
+          index--
+          setActiveOption(_options[index]);
+        }else {
+          setActiveOption(_options[_options.length - 1]);
+        }
+        break;
+      case "down":
+        if(index < _options.length){
+          index++
+          setActiveOption(_options[index]);
+        }else {
+          setActiveOption(_options[0]);
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  const handleKeyDown = () => (e: React.KeyboardEvent<HTMLLIElement>) => {
     switch (e.key) {
-      case " ":
       case "SpaceBar":
       case "Enter":
-        e.preventDefault();
-        setSelectedOption(option);
         handleSelectToggle();
+        setSelectedOption(activeOption)
+        break;
+      case "ArrowUp":
+      case "ArrowLeft":
+        handleKeyBoardNav(optionIndex, "up");
+        break;
+      case "ArrowDown":
+      case "ArrowRight":
+        handleKeyBoardNav(optionIndex, "down");
         break;
       default:
         break;
@@ -93,16 +131,15 @@ const Select = (props: SelectProps): JSX.Element => {
       },
       selected: child.props.children === selectedOption,
       option: child.props.children,
-      onKeyDown: handleKeyDown(child.props.children),
+      onKeyDown: handleKeyDown(),
       isListBoxOpen: showListBox,
+      active:  child.props.children === activeOption
     });
 
   const options = React.Children.map(props.children, attachPropsToOption);
-  const _options: Array<string | number> = [];
 
   options?.forEach((x) => _options.push(x.props.option));
 
-  console.log(_options);
 
   return (
     <Box ref={clickAwayRef}>
