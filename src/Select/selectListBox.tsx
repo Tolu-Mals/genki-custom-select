@@ -47,6 +47,10 @@ const ListBox = styled(chakra.ul)`
         border-radius: 0px 0px 4px 4px;
     }
 
+    li:focus {
+        outline: none;
+    }
+
     &::-webkit-scrollbar {
     width: 6px;
     }
