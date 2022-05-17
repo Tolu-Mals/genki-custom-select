@@ -55,7 +55,9 @@ const SelectButton = (props: buttonProps) => {
   readOnly: isReadOnly,
   isDisabled,
   isInvalid,
-  customIcon
+  customIcon,
+  showListBox,
+  selectId
  } = props;
 
   const variantMap = {
@@ -203,12 +205,16 @@ const SelectButton = (props: buttonProps) => {
 
 
   return (
-    <Flex 
+    <Flex
     onClick={onClick}
     sx={buttonStyle} 
     justify="space-between"
     align="center" mb={2}
     tabIndex={isDisabled ? null:"0"}
+    role="combobox"
+    aria-expanded={String(showListBox)}
+    aria-haspopup="listbox"
+    id={selectId}
     >
       <Text>{selectedOption ?? placeholder}</Text>
       { buttonIcon }

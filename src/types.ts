@@ -26,6 +26,8 @@ export type buttonProps = {
     focusBorderColor?: string;
     fullWidth?: boolean;
     onClick?: () => void;
+    showListBox?: boolean;
+    selectId?: string;
   };
 
   export type nativeProps = {

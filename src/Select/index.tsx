@@ -6,6 +6,8 @@ import { useSelect } from "../hooks/use-select";
 import { selectProps } from "../types";
 import styleObjects from "./styleObjects";
 
+const selectId = "select-" + React.useId();
+
 type optionProps = {
   children: React.ReactNode;
   value: string | number;
@@ -155,12 +157,14 @@ const Select = (props: selectProps): JSX.Element => {
 
   return (
     <Box ref={clickAwayRef}>
-      { label ? <chakra.label sx={labelSx}>{ label }</chakra.label>:<chakra.label sx={labelSx}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label sx={labelSx} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} htmlFor={selectId}>{props.placeholder}</chakra.label> }
       <SelectButton 
       {...buttonProps} 
       onClick={handleSelectToggle}
-      selectedOption={selectedOption} 
+      selectedOption={selectedOption}
       isInvalid={isInvalid}
+      showListBox={showListBox}
+      selectId={selectId}
       />
 
       {showListBox && <SelectListBox {...listBoxProps} options={options} />}
