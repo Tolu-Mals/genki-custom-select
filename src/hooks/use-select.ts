@@ -1,12 +1,12 @@
-import { ListBoxProps, ButtonProps, SelectProps } from '../types';
-
+import { nativeProps, listBoxProps, buttonProps, selectProps } from '../types';
 
 type UseSelectReturn = {
-    getButtonProps: ButtonProps,
-    getListBoxProps: ListBoxProps
+    nativeProps: nativeProps,
+    buttonProps: buttonProps,
+    listBoxProps: listBoxProps
 }
 
-export const useSelect = (options: SelectProps) : UseSelectReturn => {
+export const useSelect = (options: selectProps) : UseSelectReturn => {
 
   const {
     placeholder,
@@ -28,7 +28,7 @@ export const useSelect = (options: SelectProps) : UseSelectReturn => {
     onChange
   } = options;
 
-  const getButtonProps: ButtonProps = {
+  const buttonProps: buttonProps = {
     placeholder,
     readOnly,
     required,
@@ -45,12 +45,17 @@ export const useSelect = (options: SelectProps) : UseSelectReturn => {
     fullWidth,
   };
 
-  const getListBoxProps: ListBoxProps = {
+  const listBoxProps: listBoxProps = {
     listBoxStyle,
     hasTypeahead,
     onChange,
     size
   };
 
-  return {getButtonProps, getListBoxProps}
+  const nativeProps: nativeProps = {
+    name,
+    label
+  }
+
+  return { nativeProps, buttonProps, listBoxProps }
 };

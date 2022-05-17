@@ -1,4 +1,4 @@
-import { ListBoxProps } from "../types"
+import { listBoxProps } from "../types"
 import styleObjects from "./styleObjects";
 const { chakra, useColorMode } = require("@chakra-ui/react");
 const styled = require("@emotion/styled").default;
@@ -12,7 +12,7 @@ const sizeMap = {
     lg: lgListBoxStyle
 }
 
-const SelectListBox = (props: ListBoxProps): JSX.Element => {
+const SelectListBox = (props: listBoxProps): JSX.Element => {
     const { colorMode } = useColorMode();
     const { options, size = "md" } = props;
 

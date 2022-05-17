@@ -1,4 +1,4 @@
-import { ButtonProps } from "../types";
+import { buttonProps } from "../types";
 import styleObjects from "./styleObjects";
 
 const { 
@@ -42,7 +42,7 @@ const {
   flushedVariantReadOnlyStyle
 } = styleObjects;
 
-const SelectButton = (props: ButtonProps) => {
+const SelectButton = (props: buttonProps) => {
 
   const { colorMode } = useColorMode();
   const {
