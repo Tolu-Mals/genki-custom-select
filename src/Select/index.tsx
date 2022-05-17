@@ -75,8 +75,10 @@ const Select = (props: selectProps): JSX.Element => {
   }, [activeOption])
   
   const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
-  const { buttonProps, listBoxProps } = useSelect(props);
+  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
+
+  const { name, label } = nativeProps;
 
   const handleSelectItem = (item: string) => {
     setSelectedOption(item);
@@ -146,25 +148,34 @@ const Select = (props: selectProps): JSX.Element => {
 
 
   const { labelStyle, labelSizes } = styleObjects;
-  const { size = "md", name } = buttonProps;
+  const { size = "md" } = buttonProps;
   
 
   const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size] );
 
   return (
     <Box ref={clickAwayRef}>
-      { props.label ? <chakra.label sx={labelSx}>{ props.label }</chakra.label>:<chakra.label sx={labelSx}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label sx={labelSx}>{ label }</chakra.label>:<chakra.label sx={labelSx}>{props.placeholder}</chakra.label> }
       <SelectButton 
       {...buttonProps} 
       onClick={handleSelectToggle}
       selectedOption={selectedOption} 
       isInvalid={isInvalid}
       />
+
       {showListBox && <SelectListBox {...listBoxProps} options={options} />}
-      <input
-      value={selectedOption}
-      {...name }
+
+      <chakra.input
+        value={selectedOption}
+        name={name}
+        placeholder="Test"
+        sx={{
+          display: "none",
+          visibility: "hidden"
+        }}
+        aria-hidden="true"
       />
+
     </Box>
   );
 };
