@@ -38,6 +38,8 @@ export const Option = (props: optionProps): JSX.Element => {
       value={value}
       onKeyDown={onKeyDown}
       className={`${selected && "active"} ${active && "current"}` }
+      role="option"
+      aria-selected={`${selected ? true:false}`}
     >
       {children}
     </li>

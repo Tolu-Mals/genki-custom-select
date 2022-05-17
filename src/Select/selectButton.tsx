@@ -216,6 +216,9 @@ const SelectButton = (props: buttonProps) => {
     aria-haspopup="listbox"
     id={selectId}
     aria-controls={selectId + '-listbox'}
+    aria-invalid={isInvalid ? "true":"false"}
+    aria-disabled={isDisabled ? "true":"false"}
+    aria-readonly={isReadOnly ? "true":"false"}
     >
       <Text>{selectedOption ?? placeholder}</Text>
       { buttonIcon }
