@@ -50,6 +50,7 @@ const SelectButton = (props: ButtonProps) => {
   size = "md",
   placeholder,
   selectedOption,
+  onClick,
   required: isRequired,
   readOnly: isReadOnly,
   isDisabled,
@@ -203,6 +204,7 @@ const SelectButton = (props: ButtonProps) => {
 
   return (
     <Flex 
+    onClick={onClick}
     sx={buttonStyle} 
     justify="space-between"
     align="center" mb={2}

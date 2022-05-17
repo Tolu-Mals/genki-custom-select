@@ -23,6 +23,7 @@ const SelectListBox = (props: ListBoxProps): JSX.Element => {
     return (
         <ListBox
         sx={style}
+        tabIndex={-1}
         >
            {options}
         </ListBox>
@@ -45,6 +46,7 @@ const ListBox = styled(chakra.ul)`
     li:last-of-type {
         border-radius: 0px 0px 4px 4px;
     }
+<<<<<<< HEAD
 
     &::-webkit-scrollbar {
     width: 6px;
@@ -62,6 +64,12 @@ const ListBox = styled(chakra.ul)`
 
     max-height: 170px;
     overflow-y: auto;
+=======
+    li:focus-visible {
+        border: none;
+        outline: none;
+    }
+>>>>>>> 54bcf80d65cc956290e2c70da4c1bd078312fe04
 `;
 
 export default SelectListBox;

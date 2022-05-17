@@ -9,7 +9,7 @@ export type ListBoxProps = {
   };
   
 export type ButtonProps = {
-    placeholder?: string;
+    placeholder?: string | number;
     selectedOption?: string | number;
     readOnly?: boolean;
     required?: boolean;
@@ -25,6 +25,7 @@ export type ButtonProps = {
     errorBorderColor?: string;
     focusBorderColor?: string;
     fullWidth?: boolean;
+    onClick?: () => void;
   };
 
   type WithChildren = {
