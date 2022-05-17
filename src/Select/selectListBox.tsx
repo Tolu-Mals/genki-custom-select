@@ -46,14 +46,9 @@ const ListBox = styled(chakra.ul)`
     li:last-of-type {
         border-radius: 0px 0px 4px 4px;
     }
-<<<<<<< HEAD
 
     &::-webkit-scrollbar {
     width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
     }
     
     &::-webkit-scrollbar-thumb {
@@ -64,12 +59,6 @@ const ListBox = styled(chakra.ul)`
 
     max-height: 170px;
     overflow-y: auto;
-=======
-    li:focus-visible {
-        border: none;
-        outline: none;
-    }
->>>>>>> 54bcf80d65cc956290e2c70da4c1bd078312fe04
 `;
 
 export default SelectListBox;
