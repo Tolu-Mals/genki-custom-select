@@ -1,6 +1,5 @@
 import { Heading, Container, Button, useColorMode } from "@chakra-ui/react";
 import Select, { Option } from "./Select";
-import { PhoneIcon } from '@chakra-ui/icons'
 
 function App() {
   const { toggleColorMode } = useColorMode();
@@ -14,6 +13,7 @@ function App() {
           <Option value="2">two</Option>
           <Option value="6">six</Option>
           <Option value="8">eight</Option>
+          <Option value="9">elephant</Option>
           <Option value="5">five</Option>
         </Select>
       </Container>
