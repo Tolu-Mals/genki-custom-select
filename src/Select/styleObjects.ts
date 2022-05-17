@@ -124,7 +124,8 @@
       outline: "none",
       border: "1px solid #DDDDDD",
       "&:hover": {},
-      "&:focus": {}
+      "&:focus": {},
+      cursor: "not-allowed"
     },
     dark: {
       color: "#E0E0E0",
@@ -132,7 +133,8 @@
       outline: "none",
       border: "1px solid #8991A4",
       "&:hover": {},
-      "&:focus": {}
+      "&:focus": {},
+      cursor: "not-allowed"
     }
   }
 
@@ -142,14 +144,16 @@
       backgroundColor: "#F8F8F8",
       borderColor: "#E2E8F0",
       "&:hover": {},
-      "&:focus": {}
+      "&:focus": {},
+      cursor: "not-allowed"
     },
     dark: {
       outline: "none",
       backgroundColor: "#5C6271",
       borderColor: "#8991A4",
       "&:hover": {},
-      "&:focus": {}
+      "&:focus": {},
+      cursor: "not-allowed"
     }
   }
 
