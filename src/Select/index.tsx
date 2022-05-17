@@ -44,11 +44,11 @@ export const Option = (props: optionProps): JSX.Element => {
 };
 
 const Select = (props: SelectProps): JSX.Element => {
-  const [selectedOption, setSelectedOption] = React.useState<string | number>();
-  const [activeOption, setActiveOption] = React.useState<string | number>();
+  const [selectedOption, setSelectedOption] = React.useState<string>();
+  const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
   const [showListBox, toggleListBox] = React.useState(false);
-  const _options: Array<string | number> = [];
+  const _options: Array<string> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
 
   const handleSelectToggle = () => toggleListBox(!showListBox);
@@ -78,7 +78,7 @@ const Select = (props: SelectProps): JSX.Element => {
   const { getButtonProps, getListBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
 
-  const handleSelectItem = (item: string | number) => {
+  const handleSelectItem = (item: string) => {
     setSelectedOption(item);
   };
 
@@ -121,6 +121,8 @@ const Select = (props: SelectProps): JSX.Element => {
         handleKeyBoardNav(optionIndex, "down");
         break;
       default:
+        const jumpToOption = _options.find(o => o.charAt(0) === e.key)
+        jumpToOption && setActiveOption(jumpToOption)
         break;
     }
   };

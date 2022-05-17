@@ -270,6 +270,8 @@
         "li.current": {
           backgroundColor: "#F6F6F6"
         },
+        "li:focus": {},
+
     },
     dark: {
         border: "1px solid #596375",
@@ -280,7 +282,9 @@
         },
         "li.active": {
           backgroundColor: "#7A889F"
-        }
+        },
+        "&:focus": {},
+
     }
   }
 
