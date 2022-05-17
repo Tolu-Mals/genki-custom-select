@@ -270,7 +270,6 @@
         "li.current": {
           backgroundColor: "#F6F6F6"
         },
-        "li:focus": {},
 
     },
     dark: {
@@ -283,8 +282,6 @@
         "li.active": {
           backgroundColor: "#7A889F"
         },
-        "&:focus": {},
-
     }
   }
 
