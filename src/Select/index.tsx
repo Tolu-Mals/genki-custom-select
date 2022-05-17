@@ -21,18 +21,19 @@ export const Option = (props: optionProps): JSX.Element => {
   const { children, value, onClick, selected, onKeyDown, isListBoxOpen, active } =
     props;
 
-  const listRef = React.useRef(null);
+  const listItemRef = React.useRef(null);
+ 
 
   React.useEffect(() => {
-    if (listRef && isListBoxOpen) {
-      const node = listRef.current as any;
+    if (listItemRef && isListBoxOpen) {
+      const node = listItemRef.current as any;
       node.focus();
     }
-  }, [listRef, isListBoxOpen]);
+  }, [listItemRef, isListBoxOpen]);
 
   return (
     <li
-      ref={listRef}
+      ref={listItemRef}
       onClick={onClick}
       tabIndex={-1}
       value={value}
@@ -55,13 +56,19 @@ export const Select = (props: selectProps): JSX.Element => {
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
   const selectId = "select-" + uuidv4();
   const listBoxId = selectId + "-listbox";
+  const listBoxRef = React.useRef<HTMLUListElement>();
 
-  const handleSelectToggle = () => toggleListBox(!showListBox);
+  const handleSelectToggle = () => {
+    listBoxRef?.current?.classList.add("fadeOut");
+    const toggleTimeout = setTimeout(() => {
+      toggleListBox(!showListBox);
+      clearTimeout(toggleTimeout);
+    }, 150);
+  };
 
   const handleClickAway = (e: any) => {
     if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
-      // document.getElementById().
-      handleSelectToggle();
+        handleSelectToggle();
     }
   };
 
@@ -171,7 +178,7 @@ export const Select = (props: selectProps): JSX.Element => {
       selectId={selectId}
       />
 
-      {showListBox && <SelectListBox {...listBoxProps} listBoxId={listBoxId} options={options} />}
+      {showListBox && <SelectListBox {...listBoxProps} listBoxId={listBoxId} ref={listBoxRef} options={options} />}
 
       <chakra.input
         value={selectedOption}
