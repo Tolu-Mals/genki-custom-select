@@ -3,7 +3,7 @@ import { Box, chakra, useColorMode } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
-import { SelectProps } from "../types";
+import { selectProps } from "../types";
 import styleObjects from "./styleObjects";
 
 type optionProps = {
@@ -43,7 +43,7 @@ export const Option = (props: optionProps): JSX.Element => {
   );
 };
 
-const Select = (props: SelectProps): JSX.Element => {
+const Select = (props: selectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string>();
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
@@ -75,7 +75,7 @@ const Select = (props: SelectProps): JSX.Element => {
   }, [activeOption])
   
   const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
-  const { getButtonProps, getListBoxProps } = useSelect(props);
+  const { buttonProps, listBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
 
   const handleSelectItem = (item: string) => {
@@ -146,7 +146,7 @@ const Select = (props: SelectProps): JSX.Element => {
 
 
   const { labelStyle, labelSizes } = styleObjects;
-  const { size = "md" } = getButtonProps;
+  const { size = "md", name } = buttonProps;
   
 
   const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size] );
@@ -155,12 +155,16 @@ const Select = (props: SelectProps): JSX.Element => {
     <Box ref={clickAwayRef}>
       { props.label ? <chakra.label sx={labelSx}>{ props.label }</chakra.label>:<chakra.label sx={labelSx}>{props.placeholder}</chakra.label> }
       <SelectButton 
-      {...getButtonProps} 
+      {...buttonProps} 
       onClick={handleSelectToggle}
       selectedOption={selectedOption} 
       isInvalid={isInvalid}
       />
-      {showListBox && <SelectListBox {...getListBoxProps} options={options} />}
+      {showListBox && <SelectListBox {...listBoxProps} options={options} />}
+      <input
+      value={selectedOption}
+      {...name }
+      />
     </Box>
   );
 };

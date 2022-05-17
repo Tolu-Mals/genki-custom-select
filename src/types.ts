@@ -1,6 +1,6 @@
 import React from "react";
 
-export type ListBoxProps = {
+export type listBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
     onChange?: () => void;
@@ -8,7 +8,7 @@ export type ListBoxProps = {
     size?: "sm" | "md" | "lg";
   };
   
-export type ButtonProps = {
+export type buttonProps = {
     placeholder?: string | number;
     selectedOption?: string | number;
     readOnly?: boolean;
@@ -28,7 +28,12 @@ export type ButtonProps = {
     onClick?: () => void;
   };
 
-  type WithChildren = {
+  export type nativeProps = {
+    name?: string;
+    label?: string;
+  }
+
+  type withChildren = {
       children : React.ReactNode
   }
-  export type SelectProps = ListBoxProps & ButtonProps & WithChildren 
+  export type selectProps = listBoxProps & buttonProps & withChildren 
