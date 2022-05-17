@@ -46,7 +46,6 @@ const Select = (props: SelectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string | number>();
   const [activeOption, setActiveOption] = React.useState<string | number>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
-  // const [optionsList, setOptionsList] = React.useState<Array<string | number>>([])
   const [showListBox, toggleListBox] = React.useState(false);
   const { getButtonProps, getListBoxProps } = useSelect(props);
   const _options: Array<string | number> = [];
