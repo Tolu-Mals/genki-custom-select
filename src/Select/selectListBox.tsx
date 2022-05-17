@@ -23,7 +23,7 @@ const SelectListBox = (props: listBoxProps): JSX.Element => {
     return (
         <ListBox
         sx={style}
-        tabIndex={-1}
+        tabIndex="-1"
         id={props.listBoxId}
         role="listbox"
         >
