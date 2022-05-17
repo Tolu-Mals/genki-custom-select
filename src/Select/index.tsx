@@ -5,8 +5,7 @@ import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
 import { selectProps } from "../types";
 import styleObjects from "./styleObjects";
-
-const selectId = "select-" + React.useId();
+import { v4 as uuidv4} from "uuid";
 
 type optionProps = {
   children: React.ReactNode;
@@ -45,13 +44,15 @@ export const Option = (props: optionProps): JSX.Element => {
   );
 };
 
-const Select = (props: selectProps): JSX.Element => {
+export const Select = (props: selectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string>();
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
   const [showListBox, toggleListBox] = React.useState(false);
   const _options: Array<string> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
+  const selectId = "select-" + uuidv4();
+  const listBoxId = selectId + "-listbox";
 
   const handleSelectToggle = () => toggleListBox(!showListBox);
 
@@ -167,7 +168,7 @@ const Select = (props: selectProps): JSX.Element => {
       selectId={selectId}
       />
 
-      {showListBox && <SelectListBox {...listBoxProps} options={options} />}
+      {showListBox && <SelectListBox {...listBoxProps} listBoxId={listBoxId} options={options} />}
 
       <chakra.input
         value={selectedOption}
@@ -183,5 +184,3 @@ const Select = (props: selectProps): JSX.Element => {
     </Box>
   );
 };
-
-export default Select;

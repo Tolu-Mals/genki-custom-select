@@ -1,5 +1,5 @@
 import { Heading, Container, Button, useColorMode } from "@chakra-ui/react";
-import Select, { Option } from "./Select";
+import { Select, Option } from "./Select";
 
 function App() {
   const { toggleColorMode } = useColorMode();

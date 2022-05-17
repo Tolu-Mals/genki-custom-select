@@ -215,6 +215,7 @@ const SelectButton = (props: buttonProps) => {
     aria-expanded={String(showListBox)}
     aria-haspopup="listbox"
     id={selectId}
+    aria-controls={selectId + '-listbox'}
     >
       <Text>{selectedOption ?? placeholder}</Text>
       { buttonIcon }

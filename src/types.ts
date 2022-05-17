@@ -6,6 +6,7 @@ export type listBoxProps = {
     onChange?: () => void;
     options?: React.ReactNode;
     size?: "sm" | "md" | "lg";
+    listBoxId?: string;
   };
   
 export type buttonProps = {
