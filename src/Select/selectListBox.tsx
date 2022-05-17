@@ -63,8 +63,31 @@ const ListBox = styled(chakra.ul)`
     marginRight: 8px;
     }
 
+    position: absolute;
     max-height: 170px;
+    width: 100%;
     overflow-y: auto;
+    animation-name: fadeDropIn;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+
+    .fadeOut {
+        animation-name: fadeDropIn;
+        animation-duration: 0.2s;
+        animation-timing-function: ease-out;
+        animation-direction: reverse;
+    }
+
+    @keyframes fadeDropIn {
+        from {
+            opacity: 0;
+            transform: translateY(-40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
 `;
 
 export default SelectListBox;

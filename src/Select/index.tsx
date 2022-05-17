@@ -60,6 +60,7 @@ export const Select = (props: selectProps): JSX.Element => {
 
   const handleClickAway = (e: any) => {
     if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
+      // document.getElementById().
       handleSelectToggle();
     }
   };
@@ -159,7 +160,7 @@ export const Select = (props: selectProps): JSX.Element => {
   const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size] );
 
   return (
-    <Box ref={clickAwayRef}>
+    <Box ref={clickAwayRef} pos="relative">
       { label ? <chakra.label sx={labelSx} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} htmlFor={selectId}>{props.placeholder}</chakra.label> }
       <SelectButton 
       {...buttonProps} 
