@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Box, chakra, useColorMode } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
@@ -43,7 +43,8 @@ export const Option = (props: optionProps): JSX.Element => {
   );
 };
 
-const Select = (props: selectProps): JSX.Element => {
+export const Select = (props: selectProps) : JSX.Element => {
+  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const [selectedOption, setSelectedOption] = React.useState<string>();
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
@@ -75,7 +76,6 @@ const Select = (props: selectProps): JSX.Element => {
   }, [activeOption])
   
   const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
-  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
 
   const { name, label } = nativeProps;
@@ -180,4 +180,5 @@ const Select = (props: selectProps): JSX.Element => {
   );
 };
 
-export default Select;
+
+
