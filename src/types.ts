@@ -7,6 +7,8 @@ export type listBoxProps = {
     options?: React.ReactNode;
     size?: "sm" | "md" | "lg";
     listBoxId?: string;
+    className?: string;
+    ref?: React.RefObject<HTMLUListElement>;
   };
   
 export type buttonProps = {
