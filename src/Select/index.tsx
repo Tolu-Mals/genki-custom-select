@@ -5,6 +5,7 @@ import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
 import { selectProps } from "../types";
 import styleObjects from "./styleObjects";
+import { v4 as uuidv4} from "uuid";
 
 type optionProps = {
   children: React.ReactNode;
@@ -37,19 +38,23 @@ export const Option = (props: optionProps): JSX.Element => {
       value={value}
       onKeyDown={onKeyDown}
       className={`${selected && "active"} ${active && "current"}` }
+      role="option"
+      aria-selected={`${selected ? true:false}`}
     >
       {children}
     </li>
   );
 };
 
-const Select = (props: selectProps): JSX.Element => {
+export const Select = (props: selectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string>();
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
   const [showListBox, toggleListBox] = React.useState(false);
   const _options: Array<string> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
+  const selectId = "select-" + uuidv4();
+  const listBoxId = selectId + "-listbox";
 
   const handleSelectToggle = () => toggleListBox(!showListBox);
 
@@ -155,15 +160,17 @@ const Select = (props: selectProps): JSX.Element => {
 
   return (
     <Box ref={clickAwayRef}>
-      { label ? <chakra.label sx={labelSx}>{ label }</chakra.label>:<chakra.label sx={labelSx}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label sx={labelSx} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} htmlFor={selectId}>{props.placeholder}</chakra.label> }
       <SelectButton 
       {...buttonProps} 
       onClick={handleSelectToggle}
-      selectedOption={selectedOption} 
+      selectedOption={selectedOption}
       isInvalid={isInvalid}
+      showListBox={showListBox}
+      selectId={selectId}
       />
 
-      {showListBox && <SelectListBox {...listBoxProps} options={options} />}
+      {showListBox && <SelectListBox {...listBoxProps} listBoxId={listBoxId} options={options} />}
 
       <chakra.input
         value={selectedOption}
@@ -179,5 +186,3 @@ const Select = (props: selectProps): JSX.Element => {
     </Box>
   );
 };
-
-export default Select;

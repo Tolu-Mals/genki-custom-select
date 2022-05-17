@@ -6,6 +6,7 @@ export type listBoxProps = {
     onChange?: () => void;
     options?: React.ReactNode;
     size?: "sm" | "md" | "lg";
+    listBoxId?: string;
   };
   
 export type buttonProps = {
@@ -26,6 +27,8 @@ export type buttonProps = {
     focusBorderColor?: string;
     fullWidth?: boolean;
     onClick?: () => void;
+    showListBox?: boolean;
+    selectId?: string;
   };
 
   export type nativeProps = {
