@@ -23,6 +23,7 @@ const SelectListBox = (props: ListBoxProps): JSX.Element => {
     return (
         <ListBox
         sx={style}
+        tabIndex={-1}
         >
            {options}
         </ListBox>
@@ -44,6 +45,10 @@ const ListBox = styled(chakra.ul)`
 
     li:last-of-type {
         border-radius: 0px 0px 4px 4px;
+    }
+    li:focus-visible {
+        border: none;
+        outline: none;
     }
 `;
 
