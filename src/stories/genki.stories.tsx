@@ -1,14 +1,18 @@
 import * as React from "react";
 import { Container, Stack } from "@chakra-ui/layout";
+import { ChakraProvider } from "@chakra-ui/react";
 import { Select, Option } from "../Select";
+import theme from "../theme";
 
 export default {
   title: "Components / Genki / Select",
   decorators: [
     (story: Function) => (
-      <Container maxWidth="400px" mt="40px">
-        {story()}
-      </Container>
+      <ChakraProvider theme={theme}>
+        <Container maxWidth="400px" mt="40px">
+          {story()}
+        </Container>
+      </ChakraProvider>
     ),
   ],
 };
@@ -21,15 +25,13 @@ export const Plain = () => (
   </Select>
 );
 
-
 export const Sizes = () => (
   <Stack spacing={4}>
-      <Select placeholder={`lg size`} size={"lg"} />
-      <Select placeholder={`md size`} size={"md"} />
-      <Select placeholder={`sm size`} size={"sm"} />
+    <Select placeholder={`lg size`} size={"lg"} />
+    <Select placeholder={`md size`} size={"md"} />
+    <Select placeholder={`sm size`} size={"sm"} />
   </Stack>
-)
-
+);
 
 export const Variants = () => (
   <Stack>
@@ -75,12 +77,11 @@ export const States = () => (
   </Stack>
 );
 
-
 export const Controlled = () => {
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState("");
   const handleChange = (option: any) => {
-    setValue(option)
-  }
+    setValue(option);
+  };
 
   return (
     <Select
@@ -93,5 +94,5 @@ export const Controlled = () => {
       <Option value="Option 2">Option 2</Option>
       <Option value="Option 3">Option 3</Option>
     </Select>
-  )
-}
+  );
+};
