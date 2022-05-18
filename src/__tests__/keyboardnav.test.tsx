@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Select, Option } from "../index";
+import { Select, Option } from "../Select/index";
 
-describe("keyboard navigation", async () => {
+describe("keyboard navigation", () => {
 
   it("Should move down the list if the ArrowDownKey is Pressed", async () => {
     render(
