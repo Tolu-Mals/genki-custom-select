@@ -1,46 +1,102 @@
-# Getting Started with Create React App
+# Custom Select Component 
+Team Genki's entry for the Chakra UI Hackathon
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Usage
 
-## Available Scripts
+Our component is used similarly to the native html select we're all familiar with.
 
-In the project directory, you can run:
+```typescript
+import { Select, Button } from "./Select";
+import { Container } from "@chakra-ui/react";
 
-### `npm start`
+function Example() {
+  return (
+  <Container>
+    <Select>
+       <Option value="1">one</Option>
+       <Option value="2">two</Option>
+       <Option value="6">six</Option>
+       <Option value="8">eight</Option>
+       <Option value="9">elephant</Option>
+       <Option value="5">five</Option>
+     </Select>
+  </Container>
+  )
+}
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Variants and Sizes
+The select component has outlined, filled, flushed and unstyled variants and sm, md and lg sizes.
+Example:
 
-### `npm test`
+```typescript
+<Select size="lg" variant="flushed">
+  <Option value="1">one</Option>
+  <Option value="2">two</Option>
+  <Option value="6">six</Option>
+  <Option value="8">eight</Option>
+  <Option value="9">elephant</Option>
+  <Option value="5">five</Option>
+</Select>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Props
+You can also use props like readOnly, isDisabled, hideLabel, isInvalid on the Select Component
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```typescript
+<Select size="lg" readOnly hideLabel>
+  <Option value="1">one</Option>
+  <Option value="2">two</Option>
+  <Option value="6">six</Option>
+  <Option value="8">eight</Option>
+  <Option value="9">elephant</Option>
+  <Option value="5">five</Option>
+</Select>
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Overriding Styles
+You can easily override the style of the select-button, select-listbox or select-label by passing an object into `labelStyle, buttonStyle, listBoxStyle` props. For example if I wanted to make the select button have an orange background, the listbox have a red border and make the label yellow, I'll write:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+<Select 
+  size="lg" 
+  label="Choose Option" 
+  buttonStyle={{
+    backgroundColor: "orange"
+  }}
+  listBoxStyle={{
+    borderColor: "red"
+  }}
+  labelStyle={{
+    color: "yellow"
+  }}
+>
+  <Option value="1">one</Option>
+  <Option value="2">two</Option>
+  <Option value="6">six</Option>
+  <Option value="8">eight</Option>
+  <Option value="9">elephant</Option>
+  <Option value="5">five</Option>
+</Select>
+```
+### Accessibility and form support
+To make the custom select accessible you need to specify the `label` prop. You can choose to hide the label if you want by using `hideLabel`
 
-### `npm run eject`
+```typescript
+<Select 
+  label="Choose Option"
+  hideLabel
+>
+  <Option value="1">one</Option>
+  <Option value="2">two</Option>
+  <Option value="6">six</Option>
+  <Option value="8">eight</Option>
+  <Option value="9">elephant</Option>
+  <Option value="5">five</Option>
+</Select>
+```
+### Typeahead
+The custom select has a typeahead feature. Press the first letter of the option you're looking for to snap to the option.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
