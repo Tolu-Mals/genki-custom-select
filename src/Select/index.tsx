@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, chakra, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, chakra, useColorMode } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
@@ -52,7 +52,6 @@ export const Select = (props: selectProps): JSX.Element => {
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
   const [showListBox, toggleListBox] = React.useState(false);
-  const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
   const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
   const { name, label } = nativeProps;
@@ -168,11 +167,11 @@ export const Select = (props: selectProps): JSX.Element => {
   return (
     <Box ref={clickAwayRef} pos="relative">
       { label ? <chakra.label sx={labelSx} hidden={hideLabel ? true:false} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
+
       <SelectButton 
       {...buttonProps} 
       onClick={handleSelectToggle}
       selectedOption={selectedOption}
-      isInvalid={isInvalid}
       showListBox={showListBox}
       selectId={selectId}
       />
