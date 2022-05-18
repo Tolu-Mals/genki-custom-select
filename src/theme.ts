@@ -75,21 +75,25 @@ const CustomSelect: ComponentStyleConfig = {
       button: mode(outlinedVariantStyle.light, outlinedVariantStyle.dark)(props),
       listbox: mode(listBoxStyle.light, listBoxStyle.dark)(props),
       label: mode(labelStyle.light, labelStyle.dark)(props),
+      icon: mode({color: "#747486"}, {color: "#E0E0E0"})(props),
     }),
     filled: (props) => ({
       button: mode(filledVariantStyle.light, filledVariantStyle.dark)(props),
       listbox: mode(listBoxStyle.light, listBoxStyle.dark)(props),
       label: mode(labelStyle.light, labelStyle.dark)(props),
+      icon: mode({color: "#747486"}, {color: "#E0E0E0"})(props),
     }),
     flushed: (props) => ({
       button: mode(flushedVariantStyle.light, flushedVariantStyle.dark)(props),
       listbox: mode(listBoxStyle.light, listBoxStyle.dark)(props),
       label: mode(labelStyle.light, labelStyle.dark)(props),
+      icon: mode({color: "#747486"}, {color: "#E0E0E0"})(props),
     }),
     unstyled: (props) => ({
       button: mode(unstyledVariantStyle.light, unstyledVariantStyle.dark)(props),
       listbox: mode(listBoxStyle.light, listBoxStyle.dark)(props),
       label: mode(labelStyle.light, labelStyle.dark)(props),
+      icon: mode({color: "#747486"}, {color: "#E0E0E0"})(props),
     })
   },
   defaultProps: {

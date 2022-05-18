@@ -65,7 +65,7 @@ const SelectListBox = (props: listBoxProps) => {
                     width: 100%;
                     overflow-y: auto;
                 `}
-                tabIndex="-1"
+                tabIndex={-1}
                 id={props.listBoxId}
                 role="listbox"
                 >
