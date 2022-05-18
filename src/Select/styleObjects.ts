@@ -274,6 +274,8 @@
         "li.current": {
           backgroundColor: "#F6F6F6"
         },
+        backgroundColor: "#fff",
+        zIndex: "1"
 
     },
     dark: {
@@ -286,6 +288,8 @@
         "li.active": {
           backgroundColor: "#7A889F"
         },
+        backgroundColor: "#1A202C",
+        zIndex: "1"
     }
   }
 
