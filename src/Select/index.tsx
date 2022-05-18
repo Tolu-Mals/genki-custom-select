@@ -60,6 +60,7 @@ export const Select = (props: selectProps): JSX.Element => {
   const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const { size = "md", placeholder="", hideLabel } = buttonProps;
   const { name, label } = nativeProps;
+  const { labelStyle } = buttonProps;
   const { value, defaultValue, onChange } = listBoxProps
   const { colorMode: mode } = useColorMode();
 
@@ -212,9 +213,11 @@ const handleClickAway = (e: any) => {
 
   const styles = useMultiStyleConfig('CustomSelect', { size, variant: "outlined"});
 
+  const customLabelStyle = labelStyle;
+
   return (
     <Box ref={clickAwayRef} pos="relative">
-      { label ? <chakra.label __css={styles.label} hidden={hideLabel ? true:false}>{ label }</chakra.label>:<chakra.label __css={styles.label} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label __css={styles.label} hidden={hideLabel ? true:false} sx={customLabelStyle}>{ label }</chakra.label>:<chakra.label __css={styles.label} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
 
       <SelectButton 
       {...buttonProps} 

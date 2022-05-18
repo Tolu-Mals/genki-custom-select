@@ -7,7 +7,8 @@ import { chakra, useMultiStyleConfig } from "@chakra-ui/react";
 
 
 const SelectListBox = (props: listBoxProps) => {
-    const { options, size = "md", show } = props;
+    const { options, size = "md", show, listBoxStyle } = props;
+    const customStyle = listBoxStyle;
     const styles = useMultiStyleConfig('CustomSelect', { size, variant: "outlined"});
 
     const variants = {
@@ -67,6 +68,7 @@ const SelectListBox = (props: listBoxProps) => {
                 tabIndex={-1}
                 id={props.listBoxId}
                 role="listbox"
+                sx={customStyle}
                 >
                    {options}
                 </chakra.ul>

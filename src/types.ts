@@ -37,6 +37,7 @@ export type buttonProps = {
     onClick?: () => void;
     showListBox?: boolean;
     selectId?: string;
+    labelStyle?: object;
   };
 
   export type nativeProps = {
