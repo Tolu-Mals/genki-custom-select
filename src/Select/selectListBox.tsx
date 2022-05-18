@@ -15,9 +15,9 @@ const sizeMap = {
     lg: lgListBoxStyle
 }
 
-const SelectListBox = React.forwardRef((props: listBoxProps, ref) => {
+const SelectListBox = React.forwardRef((props: listBoxProps) => {
     const { colorMode } = useColorMode();
-    const { options, size = "md" } = props;
+    const { options, size = "md", ref } = props;
 
     const mode: "light" | "dark" = colorMode;
 
