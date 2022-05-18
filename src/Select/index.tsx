@@ -168,6 +168,12 @@ export const Select = (props: selectProps): JSX.Element => {
       active: child.props.children === activeOption,
     });
 
+  const handleButtonClick = () => {
+    if(!props.readOnly) {
+      handleSelectToggle()
+    }
+  }
+
   const options = React.Children.map(props.children, attachPropsToOption);
 
   options?.forEach((x) => _options.push(x.props.option));
@@ -185,7 +191,7 @@ export const Select = (props: selectProps): JSX.Element => {
 
       <SelectButton
         {...buttonProps}
-        onClick={handleSelectToggle}
+        onClick={handleButtonClick}
         selectedOption={selectedOption}
         showListBox={showListBox}
         selectId={selectId}
