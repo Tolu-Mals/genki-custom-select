@@ -214,7 +214,7 @@ const handleClickAway = (e: any) => {
 
   return (
     <Box ref={clickAwayRef} pos="relative">
-      { label ? <chakra.label __css={styles.label}>{ label }</chakra.label>:<chakra.label __css={styles.label} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label __css={styles.label} hidden={hideLabel ? true:false}>{ label }</chakra.label>:<chakra.label __css={styles.label} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
 
       <SelectButton 
       {...buttonProps} 
