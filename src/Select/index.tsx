@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Box, chakra, useColorMode } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
