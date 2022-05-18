@@ -43,7 +43,7 @@ const SelectButton = (props: buttonProps) => {
   const mode: "light" | "dark" = colorMode;
 
   const {
-  variant = "filled",
+  variant,
   size = "md",
   placeholder,
   selectedOption,
@@ -54,7 +54,8 @@ const SelectButton = (props: buttonProps) => {
   isInvalid,
   customIcon,
   showListBox,
-  selectId
+  selectId,
+  buttonStyle
  } = props;
 
    type buttonState = {
@@ -162,6 +163,9 @@ const SelectButton = (props: buttonProps) => {
 
   const tabIndex: string | undefined = isDisabled ? "":"0";
 
+  const customStyle = buttonStyle;
+  const style = Object.assign({}, buttonStateStyles, customStyle);
+
   return (
     <Box
     onClick={onClick}
@@ -177,7 +181,7 @@ const SelectButton = (props: buttonProps) => {
     aria-disabled={isDisabled ? "true":"false"}
     aria-readonly={isReadOnly ? "true":"false"}
     __css={styles.button}
-    sx={buttonStateStyles}
+    sx={style}
     >
       <Text>{selectedOption ?? placeholder}</Text>
       { buttonIcon }

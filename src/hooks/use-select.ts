@@ -28,7 +28,8 @@ export const useSelect = (options: selectProps) : UseSelectReturn => {
     hasTypeahead,
     onChange,
     value,
-    defaultValue
+    defaultValue,
+    labelStyle
   } = options;
 
   const buttonProps: buttonProps = {
@@ -47,6 +48,7 @@ export const useSelect = (options: selectProps) : UseSelectReturn => {
     errorBorderColor,
     focusBorderColor,
     fullWidth,
+    labelStyle
   };
 
   const listBoxProps: listBoxProps = {
