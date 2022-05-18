@@ -1,10 +1,11 @@
 import { buttonProps } from "../types";
 import styleObjects from "./styleObjects";
 
-const { 
-  Flex,
+import { 
+  Box,
+  useMultiStyleConfig,
+  useColorMode, 
   Text,
-  useColorMode,
   createIcon,
   IconButton, 
   Popover,
@@ -14,9 +15,9 @@ const {
   PopoverArrow,
   PopoverCloseButton,
   PopoverBody
- } = require("@chakra-ui/react");
+ } from "@chakra-ui/react";
 
-const { ChevronDownIcon } = require("@chakra-ui/icons");
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 const CopyIcon = createIcon({
   displayName: "CopyIcon",
@@ -27,13 +28,6 @@ const CopyIcon = createIcon({
 });
 
 const {
-  filledVariantStyle,
-  flushedVariantStyle,
-  outlinedVariantStyle,
-  unstyledVariantStyle,
-  smButtonStyle,
-  mdButtonStyle,
-  lgButtonStyle,
   outlinedVariantDisabledStyle,
   flushedVariantDisabledStyle,
   outlinedVariantInvalidStyle,
@@ -45,6 +39,9 @@ const {
 const SelectButton = (props: buttonProps) => {
 
   const { colorMode } = useColorMode();
+
+  const mode: "light" | "dark" = colorMode;
+
   const {
   variant = "filled",
   size = "md",
@@ -60,25 +57,6 @@ const SelectButton = (props: buttonProps) => {
   selectId
  } = props;
 
-  const variantMap = {
-    filled: filledVariantStyle,
-    flushed: flushedVariantStyle,
-    outlined: outlinedVariantStyle,
-    unstyled: unstyledVariantStyle,
-  };
-
-  const sizeMap = {
-    sm: smButtonStyle,
-    md: mdButtonStyle,
-    lg: lgButtonStyle
-  }
-
-  const iconSizeMap = {
-    sm: 6,
-    md: 8,
-    lg: 10
-  }
-
    type buttonState = {
     isRequired?: boolean;
     isReadOnly?: boolean;
@@ -86,22 +64,18 @@ const SelectButton = (props: buttonProps) => {
     isInvalid?: boolean;
   }
   
-  const mode: "light" | "dark" = colorMode;
-
-  const getButtonStyle = (buttonState: buttonState) => {
+  const styles = useMultiStyleConfig('CustomSelect', { variant, size });
+  
+  const getButtonStateStyle = (buttonState: buttonState) => {
 
     if(buttonState.isDisabled) {
       if(variant === "outlined" || variant === "filled") return Object.assign(
-        {}, 
-        sizeMap[size].button,
-        variantMap[variant][mode], 
+        {},  
         outlinedVariantDisabledStyle[mode]
         )
 
         else if (variant === "flushed") return Object.assign(
           {}, 
-          sizeMap[size].button,
-          variantMap[variant][mode], 
           flushedVariantDisabledStyle[mode]
           )
       }
@@ -109,15 +83,11 @@ const SelectButton = (props: buttonProps) => {
     else if (buttonState.isReadOnly) {
       if(variant === "outlined" || variant === "filled") return Object.assign(
         {}, 
-        sizeMap[size].button,
-        variantMap[variant][mode], 
         outlinedVariantReadOnlyStyle[mode]
       )
 
-      else if(variant === "flushed") return  Object.assign(
+      else if(variant === "flushed") return Object.assign(
         {}, 
-        sizeMap[size].button,
-        variantMap[variant][mode], 
         flushedVariantReadOnlyStyle[mode]
       )
     }
@@ -125,25 +95,17 @@ const SelectButton = (props: buttonProps) => {
     else if (buttonState.isInvalid){
       if(variant === "outlined" || variant === "filled") return Object.assign(
         {}, 
-        sizeMap[size].button,
-        variantMap[variant][mode], 
         outlinedVariantInvalidStyle[mode]
       )
-      else if(variant === "flushed") return  Object.assign(
+      else if(variant === "flushed") return Object.assign(
         {}, 
-        sizeMap[size].button,
-        variantMap[variant][mode], 
         flushedVariantInvalidStyle[mode]
       )
     }
-
-    return Object.assign(
-      {}, 
-      sizeMap[size].button, 
-      variantMap[variant][mode], 
-    );
-
+    return {}
   }
+
+  const buttonStateStyles = getButtonStateStyle({ isRequired, isReadOnly, isDisabled, isInvalid });
 
   type getButtonIconProps = {
     isReadOnly?: boolean;
@@ -160,15 +122,14 @@ const SelectButton = (props: buttonProps) => {
   const getButtonIcon = ( getButtonIconProps: getButtonIconProps) => {
     if(getButtonIconProps.isReadOnly){
       return selectedOption ? (
-        
-        <Popover width={8}>
+        <Popover>
           <PopoverTrigger>
               <IconButton
               aria-label='copy value' 
               variant="unstyled" 
-              size={iconSizeMap[size]}
+              size={size}
               onClick={copyText} 
-              icon={<CopyIcon boxSize={iconSizeMap[size]} />} 
+              icon={<CopyIcon __css={styles.icon}  />} 
               /> 
           </PopoverTrigger>
         <Portal>
@@ -184,8 +145,8 @@ const SelectButton = (props: buttonProps) => {
       ): ( <IconButton
       aria-label='copy value' 
       variant="unstyled" 
-      size={iconSizeMap[size]}
-      icon={<CopyIcon boxSize={iconSizeMap[size]} />} 
+      size={size}
+      icon={<CopyIcon __css={styles.icon} />} 
       /> )
     }
 
@@ -193,24 +154,20 @@ const SelectButton = (props: buttonProps) => {
 
     return  (
     <ChevronDownIcon
-    boxSize={iconSizeMap[size]}
-    colors={buttonStyle.color}
-    /> )
+    __css={styles.icon}
+    />)
   }
-
-  const buttonStyle = getButtonStyle({ isRequired, isReadOnly, isDisabled, isInvalid });
 
   const buttonIcon = getButtonIcon({ isReadOnly, customIcon });
 
-
+  const tabIndex: string | undefined = isDisabled ? "":"0";
 
   return (
-    <Flex
+    <Box
     onClick={onClick}
-    sx={buttonStyle} 
-    justify="space-between"
-    align="center" mb={2}
-    tabIndex={isDisabled ? null:"0"}
+    mb={2}
+    // @ts-ignore
+    tabIndex={tabIndex}
     role="combobox"
     aria-expanded={String(showListBox)}
     aria-haspopup="listbox"
@@ -219,10 +176,12 @@ const SelectButton = (props: buttonProps) => {
     aria-invalid={isInvalid ? "true":"false"}
     aria-disabled={isDisabled ? "true":"false"}
     aria-readonly={isReadOnly ? "true":"false"}
+    __css={styles.button}
+    sx={buttonStateStyles}
     >
       <Text>{selectedOption ?? placeholder}</Text>
       { buttonIcon }
-    </Flex>
+    </Box>
   );
 };
 

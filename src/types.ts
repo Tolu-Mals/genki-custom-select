@@ -1,5 +1,9 @@
 import React from "react";
 
+type listBoxAnimation = {
+  initial: string;
+  animate: string;
+}
 export type listBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
@@ -10,7 +14,7 @@ export type listBoxProps = {
     size?: "sm" | "md" | "lg";
     listBoxId?: string;
     className?: string;
-    ref?: React.RefObject<HTMLUListElement>;
+    show?: boolean;
   };
   
 export type buttonProps = {
