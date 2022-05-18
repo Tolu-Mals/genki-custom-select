@@ -5,7 +5,7 @@ import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
 import { selectProps } from "../types";
 import styleObjects from "./styleObjects";
-import { v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 type optionProps = {
   children: React.ReactNode;
@@ -18,11 +18,17 @@ type optionProps = {
 };
 
 export const Option = (props: optionProps): JSX.Element => {
-  const { children, value, onClick, selected, onKeyDown, isListBoxOpen, active } =
-    props;
+  const {
+    children,
+    value,
+    onClick,
+    selected,
+    onKeyDown,
+    isListBoxOpen,
+    active,
+  } = props;
 
   const listItemRef = React.useRef(null);
- 
 
   React.useEffect(() => {
     if (listItemRef && isListBoxOpen) {
@@ -38,9 +44,9 @@ export const Option = (props: optionProps): JSX.Element => {
       tabIndex={-1}
       value={value}
       onKeyDown={onKeyDown}
-      className={`${selected && "active"} ${active && "current"}` }
+      className={`${selected && "active"} ${active && "current"}`}
       role="option"
-      aria-selected={`${selected ? true:false}`}
+      aria-selected={selected ? true : false}
     >
       {children}
     </li>
@@ -50,7 +56,7 @@ export const Option = (props: optionProps): JSX.Element => {
 export const Select = (props: selectProps): JSX.Element => {
   const [selectedOption, setSelectedOption] = React.useState<string>();
   const [activeOption, setActiveOption] = React.useState<string>();
-  const [optionIndex, setOptionIndex] = React.useState<number>(-1)
+  const [optionIndex, setOptionIndex] = React.useState<number>(-1);
   const [showListBox, toggleListBox] = React.useState(false);
   const _options: Array<string> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
@@ -68,26 +74,37 @@ export const Select = (props: selectProps): JSX.Element => {
 
   const handleClickAway = (e: any) => {
     if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
-        handleSelectToggle();
+      handleSelectToggle();
+    }
+  };
+
+  const handleEscapeClick = (e: any) => {
+    if (e.key === "Escape") {
+      handleSelectToggle();
     }
   };
 
   React.useEffect(() => {
     if (showListBox) {
       document.addEventListener("click", (e) => handleClickAway(e), true);
+      document.addEventListener("keydown", (e) => handleEscapeClick(e), true);
     }
     return () => {
       document.removeEventListener("click", (e) => handleClickAway(e), true);
+      document.removeEventListener(
+        "keydown",
+        (e) => handleEscapeClick(e),
+        true
+      );
     };
     //eslint-disable-next-line
   }, [showListBox]);
 
   React.useEffect(() => {
-    setOptionIndex(_options.indexOf(activeOption!))
-   
-  }, [activeOption])
-  
-  const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
+    setOptionIndex(_options.indexOf(activeOption!));
+    // eslint-disable-next-line
+  }, [activeOption]);
+
   const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
 
@@ -97,35 +114,31 @@ export const Select = (props: selectProps): JSX.Element => {
     setSelectedOption(item);
   };
 
-  const handleKeyBoardNav = (index : number, direction: string) => {
+  const handleKeyBoardNav = (index: number, direction: string) => {
     switch (direction) {
       case "up":
-        if(index > 0){
-          index--
+        if (index > 0) {
+          index--;
           setActiveOption(_options[index]);
-        }else {
-          setActiveOption(_options[_options.length - 1]);
         }
         break;
       case "down":
-        if(index < _options.length){
-          index++
+        if (index < _options.length - 1) {
+          index++;
           setActiveOption(_options[index]);
-        }else {
-          setActiveOption(_options[0]);
         }
         break;
       default:
         break;
     }
-  }
+  };
 
   const handleKeyDown = () => (e: React.KeyboardEvent<HTMLLIElement>) => {
     switch (e.key) {
       case "SpaceBar":
       case "Enter":
         handleSelectToggle();
-        setSelectedOption(activeOption)
+        setSelectedOption(activeOption);
         break;
       case "ArrowUp":
       case "ArrowLeft":
@@ -136,8 +149,8 @@ export const Select = (props: selectProps): JSX.Element => {
         handleKeyBoardNav(optionIndex, "down");
         break;
       default:
-        const jumpToOption = _options.find(o => o.charAt(0) === e.key)
-        jumpToOption && setActiveOption(jumpToOption)
+        const jumpToOption = _options.find((o) => o.charAt(0) === e.key);
+        jumpToOption && setActiveOption(jumpToOption);
         break;
     }
   };
@@ -152,33 +165,46 @@ export const Select = (props: selectProps): JSX.Element => {
       option: child.props.children,
       onKeyDown: handleKeyDown(),
       isListBoxOpen: showListBox,
-      active:  child.props.children === activeOption
+      active: child.props.children === activeOption,
     });
+
+  const handleButtonClick = () => {
+    if(!props.readOnly) {
+      handleSelectToggle()
+    }
+  }
 
   const options = React.Children.map(props.children, attachPropsToOption);
 
   options?.forEach((x) => _options.push(x.props.option));
 
-
   const { labelStyle, labelSizes } = styleObjects;
   const { size = "md" } = buttonProps;
-  
 
-  const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size] );
+  const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size]);
 
   return (
     <Box ref={clickAwayRef} pos="relative">
-      { label ? <chakra.label sx={labelSx} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} htmlFor={selectId}>{props.placeholder}</chakra.label> }
-      <SelectButton 
-      {...buttonProps} 
-      onClick={handleSelectToggle}
-      selectedOption={selectedOption}
-      isInvalid={isInvalid}
-      showListBox={showListBox}
-      selectId={selectId}
+      <chakra.label sx={labelSx} htmlFor={selectId}>
+        {label ?? props.placeholder}
+      </chakra.label>
+
+      <SelectButton
+        {...buttonProps}
+        onClick={handleButtonClick}
+        selectedOption={selectedOption}
+        showListBox={showListBox}
+        selectId={selectId}
       />
 
-      {showListBox && <SelectListBox {...listBoxProps} listBoxId={listBoxId} ref={listBoxRef} options={options} />}
+      {showListBox && (
+        <SelectListBox
+          {...listBoxProps}
+          listBoxId={listBoxId}
+          ref={listBoxRef}
+          options={options}
+        />
+      )}
 
       <chakra.input
         value={selectedOption}
@@ -186,11 +212,10 @@ export const Select = (props: selectProps): JSX.Element => {
         placeholder="Test"
         sx={{
           display: "none",
-          visibility: "hidden"
+          visibility: "hidden",
         }}
         aria-hidden="true"
       />
-
     </Box>
   );
 };
