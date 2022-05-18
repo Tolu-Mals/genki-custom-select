@@ -129,7 +129,7 @@ const SelectButton = (props: buttonProps) => {
               variant="unstyled" 
               size={size}
               onClick={copyText} 
-              icon={<CopyIcon w={String(styles.icon.width)} h={String(styles.icon.height)}  />} 
+              icon={<CopyIcon __css={styles.icon}  />} 
               /> 
           </PopoverTrigger>
         <Portal>
@@ -146,7 +146,7 @@ const SelectButton = (props: buttonProps) => {
       aria-label='copy value' 
       variant="unstyled" 
       size={size}
-      icon={<CopyIcon w={String(styles.icon.width)} h={String(styles.icon.height)} />} 
+      icon={<CopyIcon __css={styles.icon} />} 
       /> )
     }
 
@@ -154,9 +154,7 @@ const SelectButton = (props: buttonProps) => {
 
     return  (
     <ChevronDownIcon
-    w={String(styles.icon.width)} 
-    h={String(styles.icon.height)}
-    color={String(styles.button.color)}
+    __css={styles.icon}
     />)
   }
 

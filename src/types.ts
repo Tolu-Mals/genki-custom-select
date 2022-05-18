@@ -7,7 +7,9 @@ type listBoxAnimation = {
 export type listBoxProps = {
     listBoxStyle?: object;
     hasTypeahead?: boolean;
-    onChange?: () => void;
+    onChange?: (e: any) => void;
+    value?: string | number;
+    defaultValue?: string;
     options?: React.ReactNode;
     size?: "sm" | "md" | "lg";
     listBoxId?: string;
@@ -16,7 +18,7 @@ export type listBoxProps = {
   };
   
 export type buttonProps = {
-    placeholder?: string | number;
+    placeholder?: string;
     selectedOption?: string | number;
     readOnly?: boolean;
     required?: boolean;
@@ -43,6 +45,6 @@ export type buttonProps = {
   }
 
   type withChildren = {
-      children : React.ReactNode
+      children?: React.ReactNode
   }
   export type selectProps = listBoxProps & buttonProps & withChildren 
