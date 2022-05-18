@@ -46,7 +46,7 @@ export const Option = (props: optionProps): JSX.Element => {
       onKeyDown={onKeyDown}
       className={`${selected && "active"} ${active && "current"}`}
       role="option"
-      aria-selected={`${selected ? true : false}`}
+      aria-selected={selected ? true : false}
     >
       {children}
     </li>
@@ -91,16 +91,20 @@ export const Select = (props: selectProps): JSX.Element => {
     }
     return () => {
       document.removeEventListener("click", (e) => handleClickAway(e), true);
-      document.removeEventListener( "keydown",(e) => handleEscapeClick(e), true);
+      document.removeEventListener(
+        "keydown",
+        (e) => handleEscapeClick(e),
+        true
+      );
     };
     //eslint-disable-next-line
   }, [showListBox]);
 
   React.useEffect(() => {
     setOptionIndex(_options.indexOf(activeOption!));
+    // eslint-disable-next-line
   }, [activeOption]);
 
-  const [isInvalid, setIsInvalid] = React.useState<boolean>(false);
   const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
   const { colorMode: mode } = useColorMode();
 
@@ -119,7 +123,7 @@ export const Select = (props: selectProps): JSX.Element => {
         }
         break;
       case "down":
-        if (index < (_options.length - 1)) {
+        if (index < _options.length - 1) {
           index++;
           setActiveOption(_options[index]);
         }
@@ -175,20 +179,14 @@ export const Select = (props: selectProps): JSX.Element => {
 
   return (
     <Box ref={clickAwayRef} pos="relative">
-      {label ? (
-        <chakra.label sx={labelSx} htmlFor={selectId}>
-          {label}
-        </chakra.label>
-      ) : (
-        <chakra.label sx={labelSx} htmlFor={selectId}>
-          {props.placeholder}
-        </chakra.label>
-      )}
+      <chakra.label sx={labelSx} htmlFor={selectId}>
+        {label ?? props.placeholder}
+      </chakra.label>
+
       <SelectButton
         {...buttonProps}
         onClick={handleSelectToggle}
         selectedOption={selectedOption}
-        isInvalid={isInvalid}
         showListBox={showListBox}
         selectId={selectId}
       />
