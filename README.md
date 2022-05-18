@@ -81,7 +81,24 @@ You can easily override the style of the select-button, select-listbox or select
   <Option value="5">five</Option>
 </Select>
 ```
-### Accessibility and form support
+#Form Support
+You can use the select component with a native html form by passing a name prop to the Select.
+
+```typescript
+<form method="POST" action="https://formsubmit.co/{email}">
+  <Select size="lg" placeholder="Eg. one" label="Choose Option" name="numberOption">
+       <Option value="1">one</Option>
+       <Option value="2">two</Option>
+       <Option value="6">six</Option>
+       <Option value="8">eight</Option>
+       <Option value="9">elephant</Option>
+       <Option value="5">five</Option>
+   </Select>
+  <Button type="submit">Submit</Button>
+</form>
+```
+
+### Accessibility
 To make the custom select accessible you need to specify the `label` prop. You can choose to hide the label if you want by using `hideLabel`
 
 ```typescript
