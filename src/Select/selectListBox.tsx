@@ -4,7 +4,6 @@ import { listBoxProps } from "../types"
 import { css } from "@emotion/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { chakra, useMultiStyleConfig } from "@chakra-ui/react";
-import styled from "@emotion/styled";
 
 
 const SelectListBox = (props: listBoxProps) => {
