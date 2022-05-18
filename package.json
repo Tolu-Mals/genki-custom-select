@@ -26,7 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "prestorybook": "rimraf node_modules/.cache/storybook"
   },
   "eslintConfig": {
     "extends": [
