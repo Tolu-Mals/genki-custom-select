@@ -74,6 +74,12 @@ export const States = () => (
       <Option value="Option 2">Option 2</Option>
       <Option value="Option 3">Option 3</Option>
     </Select>
+
+    <Select placeholder="Read Only" readOnly>
+      <Option value="Option 1">Option 1</Option>
+      <Option value="Option 2">Option 2</Option>
+      <Option value="Option 3">Option 3</Option>
+    </Select>
   </Stack>
 );
 
@@ -96,3 +102,29 @@ export const Controlled = () => {
     </Select>
   );
 };
+
+
+export const Custom = () => (
+  <Select 
+  size="lg" 
+  label="Choose Option" 
+  buttonStyle={{
+    backgroundColor: "orange"
+  }}
+  listBoxStyle={{
+    borderColor: "red"
+  }}
+  labelStyle={{
+    color: "red"
+  }}
+>
+  <Option value="1">one</Option>
+  <Option value="2">two</Option>
+  <Option value="6">six</Option>
+  <Option value="8">eight</Option>
+  <Option value="9">elephant</Option>
+  <Option value="5">five</Option>
+</Select>
+);
+
+
