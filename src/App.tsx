@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <Container>
-        <Heading mb={4}>Custom Select Component</Heading>
-        <Button onClick={toggleColorMode} mb={4}>Toggle dark</Button>
+        <Heading my={6}>Custom Select Component</Heading>
+        <Button onClick={toggleColorMode} mb={4}>Dark Mode</Button>
 
         <form method="POST" action="https://formsubmit.co/{email}">
           <Select variant="outlined" size="md" placeholder="Eg. one" label="Choose Option"  name="numberOption" >
