@@ -63,9 +63,6 @@ export const Select = (props: selectProps): JSX.Element => {
   const { value, defaultValue, onChange } = listBoxProps
   const { colorMode: mode } = useColorMode();
 
-
-// ==================== STATES ==========================
-
   const isControlled = typeof value != 'undefined'
   const hasDefaultValue = typeof defaultValue != 'undefined'
 
@@ -86,7 +83,6 @@ export const Select = (props: selectProps): JSX.Element => {
 
   const handleClickAway = (e: any) => {
     if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
-      
       handleSelectToggle();
     }
   };
@@ -112,12 +108,6 @@ export const Select = (props: selectProps): JSX.Element => {
     // eslint-disable-next-line
   }, [activeOption]);
 
-// ===============================================================
-
-
-
- // ====================== HANDLERS ==============================
-
  const handleOnchange = (option : string) => {
    if(onChange){
      onChange(option)
@@ -127,20 +117,6 @@ export const Select = (props: selectProps): JSX.Element => {
      setSelectedOption(option)
    }
  }
-
-  const handleSelectToggle = () => {
-    listBoxRef?.current?.classList.add("fadeOut");
-    const toggleTimeout = setTimeout(() => {
-      toggleListBox(!showListBox);
-      clearTimeout(toggleTimeout);
-    }, 150);
-  };
-
-  const handleClickAway = (e: any) => {
-    if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
-      handleSelectToggle();
-    }
-  };
 
   const handleEscapeClick = (e: any) => {
     if (e.key === "Escape") {
@@ -193,16 +169,6 @@ export const Select = (props: selectProps): JSX.Element => {
     }
   };
 
-  const handleButtonClick = () => {
-    if(!props.readOnly && !props.isDisabled && !props.isInvalid) {
-      handleSelectToggle()
-    }
-  }
-
-// =====================================================================
-
-
-
   const attachPropsToOption = (child: any) =>
     React.cloneElement(child, {
       onClick: () => {
@@ -216,6 +182,7 @@ export const Select = (props: selectProps): JSX.Element => {
       isListBoxOpen: showListBox,
       active: child.props.children === activeOption,
     });
+
   const options = React.Children.map(props.children, attachPropsToOption);
   options?.forEach((x) => _options.push(x.props.option));
 
@@ -224,7 +191,6 @@ export const Select = (props: selectProps): JSX.Element => {
 
   return (
     <Box ref={clickAwayRef} pos="relative">
-<<
       { label ? <chakra.label sx={labelSx} hidden={hideLabel ? true:false} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
 
       <SelectButton 
