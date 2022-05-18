@@ -1,4 +1,3 @@
-  
   const outlinedVariantStyle = {
     light: {
       '&:hover': {
@@ -78,7 +77,8 @@
       borderBottom: "1px solid #E2E8F0",
       paddingLeft: "0.5rem",
       paddingRight: "0.5rem",
-      outline: "none"
+      outline: "none",
+      borderRadius: "0px"
     },
     dark: {
         "&:hover": {
@@ -93,29 +93,23 @@
         borderBottom: "1px solid #596375",
         paddingLeft: "0.5rem",
         paddingRight: "0.5rem",
-        outline: "none"
+        outline: "none",
+        borderRadius: "0px"
       },
   };
 
   const unstyledVariantStyle =  {
     light: {
-        "&:focus": {
-          border: "1px solid #2F80ED",
-          boxShadow: "rgb(49 130 206) 0px 0.5px",
-        },
         color: "#565661",
         outline: "none"
     },
     dark: {
-        "&:focus": {
-          borderColor: "#2F80ED",
-          boxShadow: "rgb(49 130 206) 0px 0.5px",
-        },
         color: "#C7C7C7",
         outline: "none"
     }
   };
 
+ 
 
   const outlinedVariantDisabledStyle = {
     light: {
@@ -177,12 +171,12 @@
   const flushedVariantReadOnlyStyle = {
     light: {
       outline: "none",
-      bacgkroundColor: "#F8F8F8",
+      backgroundColor: "#F8F8F8",
       "&:hover": {}
     },
     dark: {
       outline: "none",
-      bacgkroundColor: "#5C6271",
+      backgroundColor: "#5C6271",
       "&:hover": {}
     }
   }
