@@ -11,6 +11,7 @@ type optionProps = {
   children: React.ReactNode;
   value: string | number;
   onClick?: () => {};
+  onChange?: () => {};
   selected?: boolean;
   active?: boolean;
   onKeyDown?: React.KeyboardEventHandler<HTMLLIElement>;
@@ -22,6 +23,7 @@ export const Option = (props: optionProps): JSX.Element => {
     children,
     value,
     onClick,
+    onChange,
     selected,
     onKeyDown,
     isListBoxOpen,
@@ -43,6 +45,7 @@ export const Option = (props: optionProps): JSX.Element => {
       onClick={onClick}
       tabIndex={-1}
       value={value}
+      onChange={onChange}
       onKeyDown={onKeyDown}
       className={`${selected && "active"} ${active && "current"}`}
       role="option"
@@ -54,7 +57,19 @@ export const Option = (props: optionProps): JSX.Element => {
 };
 
 export const Select = (props: selectProps): JSX.Element => {
-  const [selectedOption, setSelectedOption] = React.useState<string>();
+  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
+  const { size = "md", placeholder="" } = buttonProps;
+  const { name, label } = nativeProps;
+  const { value, defaultValue, onChange } = listBoxProps
+  const { colorMode: mode } = useColorMode();
+
+
+// ==================== STATES ==========================
+
+  const isControlled = typeof value != 'undefined'
+  const hasDefaultValue = typeof defaultValue != 'undefined'
+
+  const [selectedOption, setSelectedOption] = React.useState<string>(hasDefaultValue ? defaultValue : placeholder);
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1);
   const [showListBox, toggleListBox] = React.useState(false);
@@ -64,25 +79,11 @@ export const Select = (props: selectProps): JSX.Element => {
   const listBoxId = selectId + "-listbox";
   const listBoxRef = React.useRef<HTMLUListElement>();
 
-  const handleSelectToggle = () => {
-    listBoxRef?.current?.classList.add("fadeOut");
-    const toggleTimeout = setTimeout(() => {
-      toggleListBox(!showListBox);
-      clearTimeout(toggleTimeout);
-    }, 150);
-  };
+// ===========================================================
 
-  const handleClickAway = (e: any) => {
-    if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
-      handleSelectToggle();
-    }
-  };
 
-  const handleEscapeClick = (e: any) => {
-    if (e.key === "Escape") {
-      handleSelectToggle();
-    }
-  };
+
+// ======================== EFFECTS ==========================
 
   React.useEffect(() => {
     if (showListBox) {
@@ -105,10 +106,41 @@ export const Select = (props: selectProps): JSX.Element => {
     // eslint-disable-next-line
   }, [activeOption]);
 
-  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
-  const { colorMode: mode } = useColorMode();
+// ===============================================================
 
-  const { name, label } = nativeProps;
+
+
+ // ====================== HANDLERS ==============================
+
+ const handleOnchange = (option : string) => {
+   if(onChange){
+     onChange(option)
+   }
+
+   if (!isControlled){
+     setSelectedOption(option)
+   }
+ }
+
+  const handleSelectToggle = () => {
+    listBoxRef?.current?.classList.add("fadeOut");
+    const toggleTimeout = setTimeout(() => {
+      toggleListBox(!showListBox);
+      clearTimeout(toggleTimeout);
+    }, 150);
+  };
+
+  const handleClickAway = (e: any) => {
+    if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
+      handleSelectToggle();
+    }
+  };
+
+  const handleEscapeClick = (e: any) => {
+    if (e.key === "Escape") {
+      handleSelectToggle();
+    }
+  };
 
   const handleSelectItem = (item: string) => {
     setSelectedOption(item);
@@ -138,7 +170,7 @@ export const Select = (props: selectProps): JSX.Element => {
       case "SpaceBar":
       case "Enter":
         handleSelectToggle();
-        setSelectedOption(activeOption);
+        setSelectedOption(activeOption!);
         break;
       case "ArrowUp":
       case "ArrowLeft":
@@ -155,32 +187,34 @@ export const Select = (props: selectProps): JSX.Element => {
     }
   };
 
+  const handleButtonClick = () => {
+    if(!props.readOnly && !props.isDisabled && !props.isInvalid) {
+      handleSelectToggle()
+    }
+  }
+
+// =====================================================================
+
+
+
   const attachPropsToOption = (child: any) =>
     React.cloneElement(child, {
       onClick: () => {
         handleSelectItem(child.props.children);
         handleSelectToggle();
       },
+      onChange: () => handleOnchange(child.props.children),
       selected: child.props.children === selectedOption,
       option: child.props.children,
       onKeyDown: handleKeyDown(),
       isListBoxOpen: showListBox,
       active: child.props.children === activeOption,
     });
-
-  const handleButtonClick = () => {
-    if(!props.readOnly) {
-      handleSelectToggle()
-    }
-  }
-
   const options = React.Children.map(props.children, attachPropsToOption);
-
   options?.forEach((x) => _options.push(x.props.option));
 
+  
   const { labelStyle, labelSizes } = styleObjects;
-  const { size = "md" } = buttonProps;
-
   const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size]);
 
   return (

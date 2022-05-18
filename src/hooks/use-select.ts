@@ -25,7 +25,9 @@ export const useSelect = (options: selectProps) : UseSelectReturn => {
     fullWidth,
     listBoxStyle,
     hasTypeahead,
-    onChange
+    onChange,
+    value,
+    defaultValue
   } = options;
 
   const buttonProps: buttonProps = {
@@ -49,6 +51,8 @@ export const useSelect = (options: selectProps) : UseSelectReturn => {
     listBoxStyle,
     hasTypeahead,
     onChange,
+    value,
+    defaultValue,
     size
   };
 
