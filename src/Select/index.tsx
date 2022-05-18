@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, chakra, useColorMode } from "@chakra-ui/react";
+import { Box, chakra, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
@@ -21,19 +21,19 @@ export const Option = (props: optionProps): JSX.Element => {
   const { children, value, onClick, selected, onKeyDown, isListBoxOpen, active } =
     props;
 
-  const listItemRef = React.useRef(null);
+  const listRef = React.useRef(null);
  
 
   React.useEffect(() => {
-    if (listItemRef && isListBoxOpen) {
-      const node = listItemRef.current as any;
+    if (listRef && isListBoxOpen) {
+      const node = listRef.current as any;
       node.focus();
     }
-  }, [listItemRef, isListBoxOpen]);
+  }, [listRef, isListBoxOpen]);
 
   return (
     <li
-      ref={listItemRef}
+      ref={listRef}
       onClick={onClick}
       tabIndex={-1}
       value={value}
@@ -52,23 +52,26 @@ export const Select = (props: selectProps): JSX.Element => {
   const [activeOption, setActiveOption] = React.useState<string>();
   const [optionIndex, setOptionIndex] = React.useState<number>(-1)
   const [showListBox, toggleListBox] = React.useState(false);
+  const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
+  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
+  const { colorMode: mode } = useColorMode();
+  const { name, label } = nativeProps;
   const _options: Array<string> = [];
   const clickAwayRef = React.useRef<HTMLDivElement>(null);
   const selectId = "select-" + uuidv4();
   const listBoxId = selectId + "-listbox";
   const listBoxRef = React.useRef<HTMLUListElement>();
 
+
+
   const handleSelectToggle = () => {
-    listBoxRef?.current?.classList.add("fadeOut");
-    const toggleTimeout = setTimeout(() => {
-      toggleListBox(!showListBox);
-      clearTimeout(toggleTimeout);
-    }, 150);
+    toggleListBox(!showListBox);
   };
 
   const handleClickAway = (e: any) => {
     if (clickAwayRef.current && !clickAwayRef.current.contains(e.target)) {
-        handleSelectToggle();
+      
+      handleSelectToggle();
     }
   };
 
@@ -87,11 +90,7 @@ export const Select = (props: selectProps): JSX.Element => {
    
   }, [activeOption])
   
-  const [ isInvalid, setIsInvalid ] = React.useState<boolean>(false);
-  const { nativeProps, buttonProps, listBoxProps } = useSelect(props);
-  const { colorMode: mode } = useColorMode();
-
-  const { name, label } = nativeProps;
+ 
 
   const handleSelectItem = (item: string) => {
     setSelectedOption(item);
@@ -161,14 +160,14 @@ export const Select = (props: selectProps): JSX.Element => {
 
 
   const { labelStyle, labelSizes } = styleObjects;
-  const { size = "md" } = buttonProps;
+  const { size = "md", hideLabel } = buttonProps;
   
 
   const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size] );
 
   return (
     <Box ref={clickAwayRef} pos="relative">
-      { label ? <chakra.label sx={labelSx} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} htmlFor={selectId}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label sx={labelSx} hidden={hideLabel ? true:false} htmlFor={selectId} >{ label }</chakra.label>:<chakra.label sx={labelSx} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
       <SelectButton 
       {...buttonProps} 
       onClick={handleSelectToggle}
@@ -178,7 +177,7 @@ export const Select = (props: selectProps): JSX.Element => {
       selectId={selectId}
       />
 
-      {showListBox && <SelectListBox {...listBoxProps} listBoxId={listBoxId} ref={listBoxRef} options={options} />}
+      <SelectListBox {...listBoxProps} show={showListBox} listBoxId={listBoxId} options={options} />
 
       <chakra.input
         value={selectedOption}

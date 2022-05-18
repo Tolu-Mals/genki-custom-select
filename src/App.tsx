@@ -10,7 +10,7 @@ function App() {
         <Button onClick={toggleColorMode} mb={4}>Toggle dark</Button>
 
         <form method="POST" action="https://formsubmit.co/{email}">
-          <Select variant="flushed" size="lg" placeholder="Eg. one" label="Choose Option" name="numberOption" >
+          <Select variant="outlined" size="md" placeholder="Eg. one" label="Choose Option"  name="numberOption">
             <Option value="1">one</Option>
             <Option value="2">two</Option>
             <Option value="6">six</Option>
