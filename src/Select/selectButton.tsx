@@ -43,7 +43,7 @@ const SelectButton = (props: buttonProps) => {
   const mode: "light" | "dark" = colorMode;
 
   const {
-  variant = "filled",
+  variant,
   size = "md",
   placeholder,
   selectedOption,

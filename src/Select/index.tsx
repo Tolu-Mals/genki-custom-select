@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, chakra, useColorMode } from "@chakra-ui/react";
+import { Box, chakra, useColorMode, useMultiStyleConfig } from "@chakra-ui/react";
 import SelectButton from "./selectButton";
 import SelectListBox from "./selectListBox";
 import { useSelect } from "../hooks/use-select";
@@ -209,12 +209,12 @@ const handleClickAway = (e: any) => {
   options?.forEach((x) => _options.push(x.props.option));
 
   
-  const { labelStyle, labelSizes } = styleObjects;
-  const labelSx = Object.assign({}, labelStyle[mode], labelSizes[size]);
+
+  const styles = useMultiStyleConfig('CustomSelect', { size, variant: "outlined"});
 
   return (
     <Box ref={clickAwayRef} pos="relative">
-      { label ? <chakra.label >{ label }</chakra.label>:<chakra.label sx={labelSx} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
+      { label ? <chakra.label __css={styles.label}>{ label }</chakra.label>:<chakra.label __css={styles.label} hidden htmlFor={selectId}>{props.placeholder}</chakra.label> }
 
       <SelectButton 
       {...buttonProps} 
